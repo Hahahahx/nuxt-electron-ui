@@ -7,6 +7,7 @@ const Platform = builder.Platform
  */
 const options = {
   appId: 'com.app.id',
+  asar: true,
   productName: 'electron-nuxt3',
   // protocols: {
   // name: 'Your deeplink',
@@ -31,7 +32,8 @@ const options = {
   buildDependenciesFromSource: false,
 
   directories: {
-    output: 'electron-dist',
+    // eslint-disable-next-line no-template-curly-in-string
+    output: 'electron-dist/${version}',
   },
   win: {
     // eslint-disable-next-line no-template-curly-in-string
@@ -39,33 +41,44 @@ const options = {
     target: [
       {
         target: 'nsis',
-        arch: ['x64', 'ia32'],
+        arch: ['x64'],
       },
     ],
   },
-  nsis: {
+  nsis: { // 是否一键安装，建议为 false，可以让用户点击下一步、下一步、下一步的形式安装程序
+    // 如果为true，当用户双击构建好的程序，自动安装程序并打开，即：一键安装（one-click installer）
+    oneClick: false,
+    // 为所有人安装，false的话可以选择为当前用户安装
+    perMachine: true,
+    // .nsh文件会在程序安装过程执行
+    // "include": "./build/nsis/installer.nsh",
+    // packElevateHelper: true,
+    // 允许请求提升。 如果为false，则用户必须使用提升的权限重新启动安装程序。
+    allowElevation: true,
+    // 允许修改安装目录，建议为 true，是否允许用户改变安装目录，默认是不允许
+    allowToChangeInstallationDirectory: true,
     deleteAppDataOnUninstall: true,
   },
-  // mac: {
-  //   category: 'public.app-category.entertainment',
-  //   hardenedRuntime: false,
-  //   gatekeeperAssess: false,
-  //   target: [
-  //     {
-  //       target: 'default',
-  //       arch: ['x64', 'arm64']
-  //     }
-  //   ]
-  // },
-  // linux: {
-  //   maintainer: 'Your Name',
-  //   desktop: {
-  //     StartupNotify: 'false',
-  //     Encoding: 'UTF-8',
-  //     MimeType: 'x-scheme-handler/deeplink'
-  //   },
-  //   target: ['AppImage', 'rpm', 'deb']
-  // }
+  mac: {
+    category: 'public.app-category.entertainment',
+    hardenedRuntime: false,
+    gatekeeperAssess: false,
+    target: [
+      {
+        target: 'default',
+        arch: ['x64', 'arm64'],
+      },
+    ],
+  },
+  linux: {
+    maintainer: 'Your Name',
+    desktop: {
+      StartupNotify: 'false',
+      Encoding: 'UTF-8',
+      MimeType: 'x-scheme-handler/deeplink',
+    },
+    target: ['AppImage', 'rpm', 'deb'],
+  },
 }
 
 const platform = 'WINDOWS' // "MAC" | "LINUX" | "WINDOWS" - Change this to build for other platforms

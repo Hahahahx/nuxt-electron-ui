@@ -2,6 +2,7 @@ import type { BrowserWindow } from 'electron'
 import { ipcMain } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import log from 'electron-log'
+import { isMac } from '../utils/platform'
 
 // Logger
 // ======
@@ -16,7 +17,6 @@ autoUpdater.autoInstallOnAppQuit = true
 // Module
 // ======
 export default (mainWindow: BrowserWindow) => {
-  const isMac = process.platform === 'darwin'
   if (isMac) {
     autoUpdater.autoDownload = false
     autoUpdater.autoInstallOnAppQuit = false

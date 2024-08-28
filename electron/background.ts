@@ -3,41 +3,42 @@ import * as os from 'node:os'
 import { BrowserWindow, app, session } from 'electron'
 import singleInstance from './singleInstance'
 import dynamicRenderer from './dynamicRenderer'
-import titleBarActionsModule from './modules/titleBarActions'
 import updaterModule from './modules/updater'
 import macMenuModule from './modules/macMenu'
+import { isMac, isProd, platform } from './utils/platform'
+import { Module } from './utils/module'
+import WindowModule from './modules/window'
 
 // Initilize
 // =========
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
-const isProduction = process.env.NODE_ENV !== 'development'
-const platform: 'darwin' | 'win32' | 'linux' = process.platform as any
-const architucture: '64' | '32' = os.arch() === 'x64' ? '64' : '32'
 const headerSize = 32
-const modules = [titleBarActionsModule, macMenuModule, updaterModule]
+
+const moduleService = new Module()
+
+const modules = [macMenuModule, updaterModule]
 
 // Initialize app window
 // =====================
 function createWindow() {
-  console.log('System info', { isProduction, platform, architucture })
+  console.log('System info', { isProd, platform, architucture: os.arch() })
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 1440,
     height: 1024,
     minWidth: 1024,
     minHeight: 676,
-    backgroundColor: '#000',
+    // backgroundColor: '#000',
     webPreferences: {
-      devTools: !isProduction,
+      devTools: !isProd,
       nodeIntegration: true,
       contextIsolation: false,
       preload: path.join(__dirname, 'preload.js'),
     },
-
     titleBarStyle: 'hiddenInset',
     // frame: platform === 'darwin',
     frame: true, // <= Remove this line if you wanted to implement your own title bar
-    titleBarOverlay: platform === 'darwin' && { height: headerSize },
+    titleBarOverlay: isMac && { height: headerSize },
     title: 'electron-nuxt3',
   })
 
@@ -46,7 +47,7 @@ function createWindow() {
     return
 
   // Open the DevTools.
-  if (!isProduction) {
+  if (!isProd) {
     mainWindow.webContents.openDevTools({
       mode: 'bottom',
     })
@@ -58,7 +59,7 @@ function createWindow() {
 // App events
 // ==========
 app.whenReady().then(async () => {
-  if (!isProduction) {
+  if (!isProd) {
     try {
       await session.defaultSession.loadExtension(path.join(__dirname, '../..', '__extensions', 'vue-devtools'))
     }
@@ -73,6 +74,9 @@ app.whenReady().then(async () => {
 
   // Load renderer process
   dynamicRenderer(mainWindow)
+  moduleService.Init(mainWindow, [
+    WindowModule,
+  ])
 
   // Initialize modules
   console.log(`${'-'.repeat(30)}\n[+] Loading modules...`)
@@ -99,7 +103,7 @@ app.whenReady().then(async () => {
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+  if (!isMac) {
     app.quit()
   }
 })
