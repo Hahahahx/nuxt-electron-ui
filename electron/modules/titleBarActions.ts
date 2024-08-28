@@ -1,8 +1,8 @@
-import { ipcMain, BrowserWindow } from 'electron'
+import { BrowserWindow, ipcMain } from 'electron'
 
 // Helpers
 // =======
-const getWindowFromEvent = (event: Electron.IpcMainInvokeEvent) => {
+function getWindowFromEvent(event: Electron.IpcMainInvokeEvent) {
   const webContents = event.sender
   const win = BrowserWindow.fromWebContents(webContents)
   return win
@@ -18,7 +18,8 @@ export default (mainWindow: BrowserWindow) => {
 
   ipcMain.handle('titlebar:action', (event, action: 'toggleMaximize' | 'minimize') => {
     const win = getWindowFromEvent(event)
-    if (!win) return
+    if (!win)
+      return
     switch (action) {
       case 'toggleMaximize':
         win.isMaximized() ? win.unmaximize() : win.maximize()
@@ -31,7 +32,8 @@ export default (mainWindow: BrowserWindow) => {
 
   ipcMain.handle('close:app', (event) => {
     const win = getWindowFromEvent(event)
-    if (!win) return
+    if (!win)
+      return
     win.close()
   })
 

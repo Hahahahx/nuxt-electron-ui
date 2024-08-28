@@ -1,4 +1,4 @@
-import { App, BrowserWindow } from 'electron'
+import type { App, BrowserWindow } from 'electron'
 
 export default (app: App, win: BrowserWindow) => {
   const gotTheLock = app.requestSingleInstanceLock()
@@ -11,12 +11,13 @@ export default (app: App, win: BrowserWindow) => {
   app.on('second-instance', (_, _argv) => {
     if (win) {
       win.show()
-      if (win.isMinimized()) win.restore()
+      if (win.isMinimized())
+        win.restore()
       win.focus()
     }
   })
 
-  app.on('open-url', function (event, url) {
+  app.on('open-url', (event, url) => {
     event.preventDefault()
     win.webContents.send('deeplink', url)
   })

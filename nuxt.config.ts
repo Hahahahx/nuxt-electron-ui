@@ -20,7 +20,7 @@ export default defineNuxtConfig({
   ],
   ui: {
     global: true,
-    icons: ['heroicons', 'simple-icons', 'solar', 'carbon', 'vscode-icons', 'line-md'],
+    // icons: ['heroicons', 'simple-icons', 'solar', 'carbon', 'vscode-icons', 'line-md'],
     safelistColors: ['primary', 'red', 'orange', 'green'],
   },
 

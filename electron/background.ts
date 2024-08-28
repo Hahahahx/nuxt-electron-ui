@@ -1,6 +1,6 @@
-import * as path from 'path'
-import * as os from 'os'
-import { app, BrowserWindow, session } from 'electron'
+import * as path from 'node:path'
+import * as os from 'node:os'
+import { BrowserWindow, app, session } from 'electron'
 import singleInstance from './singleInstance'
 import dynamicRenderer from './dynamicRenderer'
 import titleBarActionsModule from './modules/titleBarActions'
@@ -31,24 +31,26 @@ function createWindow() {
       devTools: !isProduction,
       nodeIntegration: true,
       contextIsolation: false,
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
     },
 
     titleBarStyle: 'hiddenInset',
     // frame: platform === 'darwin',
     frame: true, // <= Remove this line if you wanted to implement your own title bar
     titleBarOverlay: platform === 'darwin' && { height: headerSize },
-    title: 'electron-nuxt3'
+    title: 'electron-nuxt3',
   })
 
   // Lock app to single instance
-  if (singleInstance(app, mainWindow)) return
+  if (singleInstance(app, mainWindow))
+    return
 
   // Open the DevTools.
-  !isProduction &&
+  if (!isProduction) {
     mainWindow.webContents.openDevTools({
-      mode: 'bottom'
+      mode: 'bottom',
     })
+  }
 
   return mainWindow
 }
@@ -59,30 +61,33 @@ app.whenReady().then(async () => {
   if (!isProduction) {
     try {
       await session.defaultSession.loadExtension(path.join(__dirname, '../..', '__extensions', 'vue-devtools'))
-    } catch (err) {
+    }
+    catch (err) {
       console.log('[Electron::loadExtensions] An error occurred: ', err)
     }
   }
 
   const mainWindow = createWindow()
-  if (!mainWindow) return
+  if (!mainWindow)
+    return
 
   // Load renderer process
   dynamicRenderer(mainWindow)
 
   // Initialize modules
-  console.log('-'.repeat(30) + '\n[+] Loading modules...')
+  console.log(`${'-'.repeat(30)}\n[+] Loading modules...`)
   modules.forEach((module) => {
     try {
       module(mainWindow)
-    } catch (err: any) {
+    }
+    catch (err: any) {
       console.log('[!] Module error: ', err.message || err)
     }
   })
 
-  console.log('[!] Loading modules: Done.' + '\r\n' + '-'.repeat(30))
+  console.log(`[!] Loading modules: Done.` + `\r\n${'-'.repeat(30)}`)
 
-  app.on('activate', function () {
+  app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     // if (BrowserWindow.getAllWindows().length === 0) createWindow()

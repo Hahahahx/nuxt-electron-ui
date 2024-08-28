@@ -38,6 +38,8 @@ export default antfu({
   ],
 
   rules: {
+    'ts/no-unused-expressions': 'off',
+    'ts/no-require-imports': 'off',
     'ts/ban-ts-comment': 'off',
     'ts/no-var-requires': 'off',
     'style/max-statements-per-line': 'off',

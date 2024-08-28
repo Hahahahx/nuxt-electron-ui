@@ -1,4 +1,5 @@
-import { BrowserWindow, ipcMain } from 'electron'
+import type { BrowserWindow } from 'electron'
+import { ipcMain } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import log from 'electron-log'
 
@@ -56,7 +57,8 @@ export default (mainWindow: BrowserWindow) => {
   })
 
   ipcMain.handle('updater:quitAndInstall', (_event) => {
-    if (!readyToInstall) return
+    if (!readyToInstall)
+      return
     autoUpdater.quitAndInstall()
   })
 
