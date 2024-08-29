@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   ssr: false,
   extends: ['@nuxt/ui-pro'],
   modules: [
+    '@vue-macros/nuxt',
     '@nuxt/ui',
     [
       '@pinia/nuxt',
@@ -40,6 +41,15 @@ export default defineNuxtConfig({
     enabled: true,
   },
 
+  components: [{
+    path: '~/components',
+  }, {
+    path: '~/components/common',
+    // pathPrefix: false
+  }, {
+    path: '~/components/ui',
+    // pathPrefix: false
+  }],
   compatibilityDate: '2024-08-14',
 
 })

@@ -38,6 +38,7 @@ export default antfu({
   ],
 
   rules: {
+    'regexp/no-unused-capturing-group': 'off',
     'ts/no-unused-expressions': 'off',
     'ts/no-require-imports': 'off',
     'ts/ban-ts-comment': 'off',
