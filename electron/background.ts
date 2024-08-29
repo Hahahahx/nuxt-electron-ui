@@ -28,18 +28,20 @@ function createWindow() {
     height: 1024,
     minWidth: 1024,
     minHeight: 676,
+    transparent: false,
     // backgroundColor: '#000',
     webPreferences: {
       devTools: !isProd,
       nodeIntegration: true,
       contextIsolation: false,
+      webSecurity: false,
       preload: path.join(__dirname, 'preload.js'),
     },
     titleBarStyle: 'hiddenInset',
     // frame: platform === 'darwin',
-    frame: true, // <= Remove this line if you wanted to implement your own title bar
-    titleBarOverlay: isMac && { height: headerSize },
-    title: 'electron-nuxt3',
+    frame: false, // <= Remove this line if you wanted to implement your own title bar
+    // titleBarOverlay: isMac && { height: headerSize },
+    // title: 'electron-nuxt3',
   })
 
   // Lock app to single instance

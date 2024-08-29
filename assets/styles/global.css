@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+  
+@layer base {
+  html {
+    scroll-behavior: smooth !important;
+  }
+
+  body{
+    @apply rounded-xl overflow-hidden;
+  }
+
+  button,
+  a,
+  input {
+    -webkit-app-region: no-drag;
+  }  
+
+
+  .drag{
+    -webkit-app-region: drag;
+  }
+  
+  .typography-h1{
+    @apply text-3xl md:text-4xl font-extrabold tracking-tight scroll-m-20 lg:text-5xl dark:text-white
+  }
+  .typography-h2{
+    @apply pb-2 text-3xl font-semibold tracking-tight transition-colors border-b scroll-m-20 first:mt-0 dark:text-white/90;
+  }
+  .typography-h3{
+    @apply  text-2xl font-semibold tracking-tight scroll-m-20 dark:text-white;
+  }
+  .typography-h4{
+    @apply text-xl font-semibold tracking-tight scroll-m-20 dark:text-white;
+  }
+  .typography-p{
+    @apply leading-7 [&:not(:first-child)]:mt-6 dark:text-white;
+  }
+  .typography-code{
+    @apply relative rounded bg-gray-500/50 px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold dark:text-white/90;
+  }
+  .typography-lead{
+    @apply text-lg opacity-50 dark:text-white;
+  }
+  .typography-large{
+    @apply text-lg font-semibold dark:text-white;
+  }
+  .typography-small{
+    @apply text-sm font-medium leading-none dark:text-white;
+  }
+  .typography-muted{
+    @apply text-sm opacity-50 dark:text-white;
+  }
+}

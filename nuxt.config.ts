@@ -25,6 +25,9 @@ export default defineNuxtConfig({
     safelistColors: ['primary', 'red', 'orange', 'green'],
   },
 
+  css: [
+    '@/assets/styles/global.css',
+  ],
   pinia: {
     storesDirs: ['composables/stores'],
   },

@@ -6,7 +6,7 @@ defineProps<{
 
 <template>
   <UDashboardPanel
-    class="dark bg-gray-900 dark:bg-gray-950/10"
+    class=" bg-gray-100 dark:bg-gray-950/50"
     :width="300"
     :resizable="{ min: 200, max: 350 }"
     collapsible
@@ -65,11 +65,15 @@ defineProps<{
       <div class="flex-1" />
 
       <template #footer>
-        <div class="w-full md:space-y-4">
-          <LayoutSiderStorage class="hidden xl:block" />
+        <div class="w-full md:space-y-4 mb-4">
           <UDivider class="sticky bottom-0" />
+
+          <div class="text-center text-xs text-gray-500 opacity-60  dark:text-gray-100">
+            {{ website.copyright }} {{ website.name }}
+
           <!-- ~/components/UserDropdown.vue -->
           <!-- <LayoutSiderUser /> -->
+          </div>
         </div>
       </template>
     </UDashboardSidebar>
