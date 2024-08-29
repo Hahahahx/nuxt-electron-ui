@@ -6,14 +6,15 @@ import { ModuleFactory } from '../utils/module'
 
 export class WindowModule extends ModuleFactory {
   Register() {
-    this.mainWindow.on('maximize', () => this.mainWindow.webContents.send(WindowServiceEvent.Maximized, true))
-    this.mainWindow.on('unmaximize', () => this.mainWindow.webContents.send(WindowServiceEvent.UnMaximized, false))
-    this.mainWindow.on('minimize', () => this.mainWindow.webContents.send(WindowServiceEvent.Minimized, true))
-    this.mainWindow.on('enter-full-screen', () => this.mainWindow.webContents.send(WindowServiceEvent.EnterFullScreen, true))
-    this.mainWindow.on('leave-full-screen', () => this.mainWindow.webContents.send(WindowServiceEvent.LeaveFullScreen, false))
+    this.mainWindow.on('maximize', () => this.mainWindow.webContents.send(WindowServiceEvent.Max_Changed, true))
+    this.mainWindow.on('unmaximize', () => this.mainWindow.webContents.send(WindowServiceEvent.Max_Changed, false))
+    this.mainWindow.on('minimize', () => this.mainWindow.webContents.send(WindowServiceEvent.Min_Changed, true))
+    this.mainWindow.on('restore', () => this.mainWindow.webContents.send(WindowServiceEvent.Min_Changed, false))
+    this.mainWindow.on('enter-full-screen', () => this.mainWindow.webContents.send(WindowServiceEvent.FullScreen_Changed, true))
+    this.mainWindow.on('leave-full-screen', () => this.mainWindow.webContents.send(WindowServiceEvent.FullScreen_Changed, false))
 
     // 是否是最大化
-    this.RegisterHandler(WindowServiceEvent.isMax, async (event) => {
+    this.RegisterHandler(WindowServiceEvent.IsMax, async (event) => {
       return event.eventWindow.isMaximized()
     })
 

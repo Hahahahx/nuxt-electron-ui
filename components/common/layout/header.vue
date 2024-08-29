@@ -1,19 +1,29 @@
+<script setup lang="ts">
+const { actions } = useElectron()
+</script>
+
 <template>
-  <header class="absolute top-0 z-10 w-screen">
-    <div class="h-[70px] flex items-center justify-between px-10 backdrop-blur">
-      <!-- 左侧内容 -->
-      <div class="flex gap-4">
-        <slot name="header-start" />
-      </div>
+  <header class="flex h-[60px] flex-shrink-0 items-center gap-1 px-4 drag">
+    <!-- <h1 class="text-xl font-semibold">
+      {{ page.title }}
+    </h1> -->
 
-      <!-- 中间内容 -->
-      <slot name="header-center" />
-
-      <!-- 右侧内容 -->
-      <div class="flex items-center justify-end gap-3">
-        <slot name="header-end" />
-      </div>
-    </div>
-    <!-- <UDivider class="opacity-20" /> -->
+    <div id="header-left" />
+    <div class="ml-auto gap-1.5 text-sm" />
+    <Flex justify-content="end" align-items="center" class="drag gap-3">
+      <ThemeToggle />
+      <UDivider orientation="vertical" class="mx-2 h-[20px] w-[1px]" />
+      <Flex justify-content="end" align-items="center" class="gap-1">
+        <UButton
+          square variant="ghost" icon="i-mdi-minus" class="overflow-hidden " @click="actions?.min()"
+        />
+        <UButton
+          square variant="ghost" icon="i-mdi-crop-square" class="overflow-hidden " @click="actions?.max"
+        />
+        <UButton
+          square variant="ghost" icon="i-mdi-window-close" class="overflow-hidden " @click="actions?.close()"
+        />
+      </Flex>
+    </Flex>
   </header>
 </template>

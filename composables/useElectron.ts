@@ -1,3 +1,5 @@
+import { WindowServiceEvent } from '~/electron/event'
+
 export default function useElectron() {
   const isServer = import.meta.server || typeof window === 'undefined' || typeof window.require === 'undefined'
   const isElectron = !isServer && navigator.userAgent.toLowerCase().includes('electron')
@@ -9,27 +11,31 @@ export default function useElectron() {
 
   // Window title bar actions
   // ========================
-  const titleBarActions = {
-    minimize: () => electron.ipcRenderer.invoke('titlebar:action', 'minimize'),
-    toggleMaximize: () => electron.ipcRenderer.invoke('titlebar:action', 'toggleMaximize'),
-    isMaximized: () => electron.ipcRenderer.invoke('isMaximized:app', null),
-    close: () => electron.ipcRenderer.invoke('close:app', null),
+  const actions = {
+    min: () => electron.ipcRenderer.invoke(WindowServiceEvent.Min),
+    max: () => electron.ipcRenderer.invoke(WindowServiceEvent.Max),
+    isMax: () => electron.ipcRenderer.invoke(WindowServiceEvent.IsMax),
+    close: () => electron.ipcRenderer.invoke(WindowServiceEvent.Close),
   }
 
   // Window title bar stats
   // ======================
   const windowStats = ref({
     isMaximized: false,
+    isMinimized: false,
     isFullscreen: false,
   })
 
-  electron.ipcRenderer.on('window:maximizeChanged', (_event, value) => {
+  electron.ipcRenderer.on(WindowServiceEvent.Max_Changed, (_event, value) => {
     windowStats.value.isMaximized = value
   })
-  electron.ipcRenderer.on('window:fullscreenChanged', (_event, value) => {
+  electron.ipcRenderer.on(WindowServiceEvent.Min_Changed, (_event, value) => {
+    windowStats.value.isMinimized = value
+  })
+  electron.ipcRenderer.on(WindowServiceEvent.FullScreen_Changed, (_event, value) => {
     windowStats.value.isFullscreen = value
   })
 
   // Initialize ipcRenderer
-  return { isElectron, titleBarActions, windowStats }
+  return { isElectron, actions, windowStats }
 }

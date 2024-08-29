@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  sider?: Config['userSider']
+  sider: Sider
 }>()
 </script>
 
@@ -15,15 +15,14 @@ defineProps<{
       <template #header>
         <UDashboardNavbar class="!border-transparent h-32 z-0" :ui="{ left: 'flex-1' }">
           <template #left>
-            <NuxtLink to="/user/data/dashboard" class="w-full flex justify-center">
-              <Logo />
+            <NuxtLink to="/dashboard" class="w-full flex justify-center">
+              <Logo dark="assets/images/logo_dark.svg" light="assets/images/logo_light.svg" class="size-20 invert dark:filter-none" />
             </NuxtLink>
           </template>
         </UDashboardNavbar>
 
         <UDivider />
       </template>
-
 
       <div>
         <div v-for="item in sider" :key="item.group" class="mb-8">
@@ -33,7 +32,7 @@ defineProps<{
 
           <!-- <UDashboardSidebarLinks :links="item.list" /> -->
           <div v-for="(link, index) in item.list" :key="index">
-            <ULink :to="link.to" class="block w-full" :target="link?.target">
+            <ULink :to="link.to" class="block w-full">
               <UButton
                 :icon="link.icon"
                 block

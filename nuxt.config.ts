@@ -29,7 +29,7 @@ export default defineNuxtConfig({
     storesDirs: ['composables/stores'],
   },
   imports: {
-    dirs: ['api', 'utils', 'utils/**/*'],
+    dirs: ['api', 'utils', 'utils/**/*', 'config'],
     presets: [
       {
         from: 'zod',

@@ -2,16 +2,11 @@ export enum WindowServiceEvent {
   Min = 'window-min',
   Max = 'window-max',
   Close = 'window-close',
-
-  isMax = 'window-is-maximized',
-
-  Maximized = 'window-maximized',
-  UnMaximized = 'window-un-maximized',
-  Minimized = 'window-minimized',
+  IsMax = 'window-is-maximized',
+  Max_Changed = 'window-max-changed',
+  Min_Changed = 'window-min-changed',
+  FullScreen_Changed = 'window-full-screen-changed',
   Restored = 'window-restored',
-
-  EnterFullScreen = 'window-enter-full-screen',
-  LeaveFullScreen = 'window-leave-full-screen',
 
   OpenFile = 'window-open-file',
   DownloadInit = 'window-download-init',

@@ -1,16 +1,38 @@
-<template>
-  <div>
-    <p id="electron-status">isElectron: {{ useElectron().isElectron }}</p>
-    <NuxtWelcome />
-  </div>
-</template>
+<script setup lang="ts">
+// const config = useConfigsStore()
+// const rclone = useRcloneStore()
 
-<style>
-#electron-status {
-  background: #000;
-  color: #fff;
-  position: absolute;
-  font-size: 2rem;
-  font: bold;
-}
-</style>
+// const alert = useAlert()
+
+// const { loading, error, refetch } = useRequest(config.runRclone, {
+//   onError(error) {
+//     console.log('init-----------------------', error)
+//     alert.error(error)
+//   },
+//   onSuccess(params) {
+//     console.log('init-----------------------', params)
+//     rclone.listConfig()
+//     // window.platform.download.init({
+//     //   token: params!.token,
+//     // })
+//   },
+// })
+</script>
+
+<template>
+  <NuxtLoadingIndicator />
+
+  <NuxtLayout>
+    <LayoutPage :loading="false" :error="false">
+      <template #error>
+        <StateError
+          headline="ERROR"
+          title="Rclone请求异常"
+          description="不好意思，我们在运行中出现了一些问题，请确保没有禁用该程序"
+          action-text="重试"
+        />
+      </template>
+      <NuxtPage />
+    </LayoutPage>
+  </NuxtLayout>
+</template>
