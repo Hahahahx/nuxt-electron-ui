@@ -31,6 +31,9 @@ const options = {
   nodeGypRebuild: false,
   buildDependenciesFromSource: false,
 
+  extraResources: [{
+    from: './electron/assets/rclone.exe',
+  }],
   directories: {
     // eslint-disable-next-line no-template-curly-in-string
     output: 'electron-dist/${version}',

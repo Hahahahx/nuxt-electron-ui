@@ -20,13 +20,12 @@ const colors = {
 type Unit = keyof typeof colors
 
 const unitFunc = {
-  B: mertic,
-  KB: merticKB,
-  MB: merticMB,
-  GB: merticGB,
-  TB: merticTB,
+  B: byteTrans.mertic,
+  KB: byteTrans.merticKB,
+  MB: byteTrans.merticMB,
+  GB: byteTrans.merticGB,
+  TB: byteTrans.merticTB,
 }
-
 
 const obj = computed(() => {
   return unitFunc[unit]<{
@@ -42,7 +41,7 @@ const obj = computed(() => {
 </script>
 
 <template>
-  <UBadge :color="obj.color" variant="solid" class="shadow-sm shadow-inner opacity-90">
+  <UBadge :color="obj.color as any" variant="solid" class="shadow-sm shadow-inner opacity-90">
     {{ obj.value }}
   </UBadge>
 </template>

@@ -1,0 +1,19 @@
+{
+    "taskId": "a1254ccaa84a8a9e10baecda39c29821",
+    "resume": false,
+    "configDir": "./temp_info",
+    "downloadUrl": "http://127.0.0.1:5572/[hx-test:20119-gtwnc]/%E8%AE%A8%E8%AE%BA.pdf",
+    "storageDir": "C:\\Users\\hx\\Desktop",
+    "filename": "讨论.pdf",
+    "chunks": 1,
+    "createTime": 1725111067931,
+    "computed": {
+        "chunksInfo": [
+            {
+                "index": 0,
+                "from": 0,
+                "to": -1
+            }
+        ]
+    }
+}

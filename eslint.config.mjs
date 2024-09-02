@@ -38,6 +38,7 @@ export default antfu({
   ],
 
   rules: {
+    'unused-imports/no-unused-vars': 'warn',
     'regexp/no-unused-capturing-group': 'off',
     'ts/no-unused-expressions': 'off',
     'ts/no-require-imports': 'off',

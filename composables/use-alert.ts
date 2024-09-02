@@ -1,7 +1,7 @@
 export function useAlert() {
   const toast = useToast()
 
-  return {
+  const alert = {
     info: (title: string, desc?: string) => {
       console.log(title, desc)
       toast.add({
@@ -32,5 +32,24 @@ export function useAlert() {
         description: desc,
       })
     },
+  }
+
+  function ToastWhenErr(handler: (...args: any) => Promise<void>, params?: {
+    title: string
+    desc: string
+  }) {
+    return async (...args: any) => {
+      try {
+        await handler(...args)
+      }
+      catch (err: any) {
+        alert.error(params?.title ?? '操作失败', (params?.desc ?? '原因：') + err.toString())
+      }
+    }
+  }
+
+  return {
+    ...alert,
+    catch: ToastWhenErr,
   }
 }

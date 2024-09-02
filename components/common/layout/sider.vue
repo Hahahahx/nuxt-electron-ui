@@ -8,7 +8,6 @@ defineProps<{
   <UDashboardPanel
     class=" bg-gray-100 dark:bg-gray-950/50"
     :width="300"
-    :resizable="{ min: 200, max: 350 }"
     collapsible
   >
     <UDashboardSidebar>
@@ -16,7 +15,7 @@ defineProps<{
         <UDashboardNavbar class="!border-transparent h-32 z-0" :ui="{ left: 'flex-1' }">
           <template #left>
             <NuxtLink to="/dashboard" class="w-full flex justify-center">
-              <Logo dark="assets/images/logo_dark.svg" light="assets/images/logo_light.svg" class="size-20 invert dark:filter-none" />
+              <Logo dark="/images/logo/osca.svg" light="/images/logo/osca.svg" class="size-28 invert dark:filter-none" />
             </NuxtLink>
           </template>
         </UDashboardNavbar>
@@ -38,7 +37,10 @@ defineProps<{
                 block
                 :color="$route.fullPath.includes(link.to) ? 'primary' : 'gray'"
                 size="lg"
-                class="my-1 justify-start opacity-95"
+                :class="{
+                  'bg-primary-500/10': $route.fullPath.includes(link.to),
+                }"
+                class="my-1 justify-start dark:opacity-95"
                 :variant="$route.fullPath.includes(link.to) ? 'soft' : 'ghost'"
                 :label="link.label"
                 :trailing="false"

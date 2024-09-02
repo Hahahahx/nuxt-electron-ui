@@ -8,11 +8,12 @@ import macMenuModule from './modules/macMenu'
 import { isMac, isProd, platform } from './utils/platform'
 import { Module } from './utils/module'
 import WindowModule from './modules/window'
+import RcloneModule from './modules/rclone'
 
 // Initilize
 // =========
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
-const headerSize = 32
+// const headerSize = 32
 
 const moduleService = new Module()
 
@@ -33,13 +34,14 @@ function createWindow() {
     webPreferences: {
       devTools: !isProd,
       nodeIntegration: true,
+      nodeIntegrationInWorker: true,
       contextIsolation: false,
       webSecurity: false,
       preload: path.join(__dirname, 'preload.js'),
     },
     titleBarStyle: 'hiddenInset',
     // frame: platform === 'darwin',
-    frame: false, // <= Remove this line if you wanted to implement your own title bar
+    frame: !isProd, // <= Remove this line if you wanted to implement your own title bar
     // titleBarOverlay: isMac && { height: headerSize },
     // title: 'electron-nuxt3',
   })
@@ -78,6 +80,7 @@ app.whenReady().then(async () => {
   dynamicRenderer(mainWindow)
   moduleService.Init(mainWindow, [
     WindowModule,
+    RcloneModule,
   ])
 
   // Initialize modules

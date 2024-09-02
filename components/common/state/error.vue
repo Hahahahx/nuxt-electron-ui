@@ -4,6 +4,7 @@ const props = withDefaults(defineProps<{
   title?: string
   description?: string
   actionText?: string
+  error?: string
   actionHandle?: () => void
 }>(), {
   headline: 'ERROR',
@@ -19,9 +20,9 @@ function onClick() {
 </script>
 
 <template>
-  <div class="flex items-center justify-center h-full max-w-screen-xl px-4 py-8 mx-auto lg:px-6 lg:py-16">
+  <div class="flex items-start justify-center h-full overflow-y-auto w-full px-4 py-8 mx-auto lg:px-6 lg:py-16">
     <div class="max-w-screen-sm mx-auto text-center">
-      <h1 class="mb-4 font-extrabold tracking-tight text-primary-600 dark:text-primary-500 text-7xl lg:text-9xl">
+      <h1 class="mb-4 font-extrabold tracking-tight text-primary-600 dark:text-primary-500 text-5xl lg:text-9xl">
         {{ headline }}
       </h1>
       <p class="mb-4 text-3xl font-bold tracking-tight text-gray-900 md:text-4xl dark:text-white">
@@ -30,9 +31,12 @@ function onClick() {
       <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
         {{ description }}
       </p>
-      <Button class="font-bold" @click="onClick">
+      <p v-if="error" class="mb-4 text font-light text-gray-500/90 dark:text-gray-400 rounded p-5 bg-gray-200 dark:bg-gray-800">
+        {{ error }}
+      </p>
+      <UButton size="lg" class="font-bold" @click="onClick">
         {{ actionText }}
-      </Button>
+      </UButton>
     </div>
   </div>
 </template>

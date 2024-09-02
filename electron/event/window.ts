@@ -9,8 +9,10 @@ export enum WindowServiceEvent {
   Restored = 'window-restored',
 
   OpenFile = 'window-open-file',
+  ChooseDir = 'window-choose-dir',
   DownloadInit = 'window-download-init',
-  DownloadProgress = 'window-download-progress',
+  DownloadProgress_Changed = 'window-download-progress-changed',
+  DownloadStatus_Changed = 'window-download-status-changed',
   Download = 'window-download',
   DownloadPause = 'window-download-pause',
   DownloadResume = 'window-download-resume',
@@ -19,4 +21,10 @@ export enum WindowServiceEvent {
 
 export interface WindowOpenParams {
   paths: string[]
+}
+
+export interface WindowDownloadParams {
+  url: string
+  path: string
+  filename: string
 }

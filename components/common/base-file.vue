@@ -19,7 +19,7 @@ defineProps<{
           'opacity-30': loading,
         }"
       >
-      <Iconify v-if="loading" icon="mingcute:loading-fill" class="animate-spin size-12  absolute text-white" />
+      <UIcon v-if="loading" name="mingcute:loading-fill" class="animate-spin size-12  absolute text-white" />
     </div>
   </div>
 </template>

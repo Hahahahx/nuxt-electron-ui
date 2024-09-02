@@ -1,5 +1,4 @@
 <script setup lang="ts" generic="T extends { [key: string]: any;}">
-
 const { list, columns, menus, refresh, defaultPageSizes = [10, 20, 30, 40] } = defineProps<{
   defaultPageSizes?: number[]
   list: T[]
@@ -10,7 +9,7 @@ const { list, columns, menus, refresh, defaultPageSizes = [10, 20, 30, 40] } = d
     sortable?: boolean
   }[]
   menus?: (row: T) => any[][]
-  refresh?: () => Promise<any>
+  refresh?: (params?: any) => Promise<any>
   loading?: boolean
   disableQuery?: boolean
   searchText?: string
@@ -18,18 +17,18 @@ const { list, columns, menus, refresh, defaultPageSizes = [10, 20, 30, 40] } = d
 }>()
 
 defineSlots<{
-  'selected': any
-  'filter': any
+  selected: any
+  filter: any
   [k: string]: (scope: { row: T }) => any
 }>()
 
 const { query, selected, pageSize, pageIndex, sort } = defineModels<{
-  query: string
+  query?: string
   selected?: T[]
   pageSize: number
   pageIndex: number
   sort?: {
-    clumn: keyof T
+    column: keyof T
     direction: 'asc' | 'desc'
   }
 }>()
@@ -53,20 +52,17 @@ const showColumns = ref<{ key: any, label?: string }[]>([...columns])
 
 const selectedColumns: any = computed(() => columns.filter(c => showColumns.value.some(sc => sc.key === c.key)))
 const slots = useSlots()
-
-
 </script>
 
 <template>
-  <UDashboardToolbar>
+  <UDashboardToolbar class="w-full">
     <template #left>
       <UInput
         v-if="!disableQuery"
-        ref="input"
         v-model="query"
         icon="i-heroicons-funnel"
         autocomplete="off"
-        :placeholder="$t('table.search')"
+        placeholder="搜索..."
         class="hidden lg:block"
         @keydown.esc="$event.target.blur()"
       >
@@ -132,8 +128,8 @@ const slots = useSlots()
     <template v-if="menus" #opt-actions-data="{ row }">
       <div class="flex justify-end items-center">
         <div class="lg:block hidden">
-          <ULink v-for="(item, i) in menus(row).flat().filter(menu => menu?.show)" :key="i" :class="{'opacity-60': item.disabled}" :to="item.to" :disabled="item.disabled">
-            <UButton :color="item.disabled?'gray':'primary'" variant="ghost" :disabled="item.disabled" @click="item.click">
+          <ULink v-for="(item, i) in menus(row).flat().filter(menu => menu?.show)" :key="i" :class="{ 'opacity-60': item.disabled }" :to="item.to" :disabled="item.disabled">
+            <UButton :color="item.disabled ? 'gray' : 'primary'" variant="ghost" :disabled="item.disabled" @click="item.click">
               {{ item.label }}
             </UButton>
           </ULink>
@@ -147,7 +143,7 @@ const slots = useSlots()
   <!-- Start coding here -->
   <!-- <div class="relative overflow-hidden rounded-b-md bg-gray-50 dark:bg-gray-900/50"> -->
   <nav
-    class="flex flex-col items-center justify-between p-4 md:flex-row md:items-center space-y-3 md:space-y-0"
+    class="flex w-full flex-col items-center justify-between p-4 md:flex-row md:items-center space-y-3 md:space-y-0"
     aria-label="Table navigation"
   >
     <span class="text-sm font-normal text-gray-500 dark:text-gray-400">

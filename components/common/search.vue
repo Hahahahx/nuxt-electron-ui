@@ -1,23 +1,17 @@
 <script setup lang="ts">
-
-
-const { toggleDashboardSearch } = useUIState()
-const { metaSymbol } = useShortcuts()
-
+const { modelValue } = defineModels<{
+  modelValue: string
+}>()
 </script>
 
-
-
 <template>
-  <UButton color="gray" icon="i-heroicons-magnifying-glass-16-solid" variant="solid" @click="toggleDashboardSearch()">
-    <div class="w-[100px] text-left hidden md:block">
-      {{ $t('search') }}
-    </div>
-    <template #trailing>
-      <div class=" items-center gap-0.5 hidden md:flex">
-        <UKbd>{{ metaSymbol }}</UKbd>
-        <UKbd>K</UKbd>
-      </div>
-    </template>
-  </UButton>
+  <UInput
+    v-model="modelValue"
+    icon="i-heroicons-magnifying-glass-20-solid"
+    :trailing="false"
+    placeholder="搜索..."
+    :ui="{
+      base: 'w-[200px] focus:w-[250px] transition-all duration-100 ease-in-out',
+    }"
+  />
 </template>

@@ -15,10 +15,10 @@ const { actions } = useElectron()
       <UDivider orientation="vertical" class="mx-2 h-[20px] w-[1px]" />
       <Flex justify-content="end" align-items="center" class="gap-1">
         <UButton
-          square variant="ghost" icon="i-mdi-minus" color="gray" class=" hover:bg-primary-500/20 dark:hover:bg-primary-500/20 " @click="actions?.min()"
+          square variant="ghost" icon="i-mdi-window-minimize" color="gray" class=" hover:bg-primary-500/20 dark:hover:bg-primary-500/20 " @click="actions?.min()"
         />
         <UButton
-          square variant="ghost" icon="i-mdi-crop-square" color="gray" class=" hover:bg-primary-500/20 dark:hover:bg-primary-500/20 " @click="actions?.max"
+          square variant="ghost" icon="i-mdi-window-maximize" color="gray" class=" hover:bg-primary-500/20 dark:hover:bg-primary-500/20 " @click="actions?.max"
         />
         <UButton
           square variant="ghost" icon="i-mdi-window-close" color="gray" class=" hover:bg-primary-500/20 dark:hover:bg-primary-500/20 " @click="actions?.close()"

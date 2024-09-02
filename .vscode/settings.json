@@ -53,7 +53,8 @@
   ],
 
   "files.associations": {
-    "*.css": "tailwindcss"
+    "*.css": "tailwindcss",
+    "*.vue": "vue"
   },
   "editor.quickSuggestions": {
     "strings": true

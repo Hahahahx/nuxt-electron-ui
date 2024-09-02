@@ -17,27 +17,6 @@ importers:
       '@formkit/auto-animate':
         specifier: ^0.8.1
         version: 0.8.2
-      '@iconify-json/carbon':
-        specifier: ^1.1.21
-        version: 1.1.37
-      '@iconify-json/heroicons':
-        specifier: ^1.1.20
-        version: 1.1.24
-      '@iconify-json/line-md':
-        specifier: ^1.1.37
-        version: 1.1.40
-      '@iconify-json/simple-icons':
-        specifier: ^1.1.92
-        version: 1.1.114
-      '@iconify-json/solar':
-        specifier: ^1.1.9
-        version: 1.1.10
-      '@iconify-json/twemoji':
-        specifier: ^1.1.12
-        version: 1.1.16
-      '@iconify-json/vscode-icons':
-        specifier: ^1.1.34
-        version: 1.1.37
       '@nuxt/content':
         specifier: 2.12.0
         version: 2.12.0(ioredis@5.4.1)(magicast@0.3.5)(nuxt@3.13.0(@parcel/watcher@2.4.1)(@types/node@22.5.1)(eslint@9.9.1(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.2(@types/node@22.5.1)(terser@5.31.6)))(rollup@4.21.1)(vue@3.4.38(typescript@5.5.4))
@@ -47,12 +26,9 @@ importers:
       '@nuxt/image':
         specifier: 1.3.0
         version: 1.3.0(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.21.1)
-      '@nuxt/ui':
-        specifier: ^2.18.4
-        version: 2.18.4(axios@1.7.5)(magicast@0.3.5)(rollup@4.21.1)(vite@5.4.2(@types/node@22.5.1)(terser@5.31.6))(vue@3.4.38(typescript@5.5.4))
       '@nuxt/ui-pro':
-        specifier: 1.4.1
-        version: 1.4.1(axios@1.7.5)(magicast@0.3.5)(rollup@4.21.1)(vite@5.4.2(@types/node@22.5.1)(terser@5.31.6))(vue@3.4.38(typescript@5.5.4))
+        specifier: 1.3.0
+        version: 1.3.0(axios@1.7.5)(magicast@0.3.5)(rollup@4.21.1)(vite@5.4.2(@types/node@22.5.1)(terser@5.31.6))(vue@3.4.38(typescript@5.5.4))
       '@nuxtjs/fontaine':
         specifier: ^0.4.1
         version: 0.4.3(magicast@0.3.5)(rollup@4.21.1)
@@ -62,6 +38,9 @@ importers:
       '@nuxtjs/i18n':
         specifier: 8.1.1
         version: 8.1.1(magicast@0.3.5)(rollup@4.21.1)(vue@3.4.38(typescript@5.5.4))
+      '@pinia-plugin-persistedstate/nuxt':
+        specifier: ^1.2.0
+        version: 1.2.1(@pinia/nuxt@0.5.4(magicast@0.3.5)(rollup@4.21.1)(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4)))(magicast@0.3.5)(pinia@2.2.2(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4)))(rollup@4.21.1)
       '@pinia/nuxt':
         specifier: ^0.5.4
         version: 0.5.4(magicast@0.3.5)(rollup@4.21.1)(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4))
@@ -95,6 +74,12 @@ importers:
       highlight.js:
         specifier: ^11.9.0
         version: 11.10.0
+      node-downloader-helper:
+        specifier: 2.1.9
+        version: 2.1.9
+      node-parallel-downloader:
+        specifier: 1.0.46
+        version: 1.0.46
       nuxt:
         specifier: ^3.13.0
         version: 3.13.0(@parcel/watcher@2.4.1)(@types/node@22.5.1)(eslint@9.9.1(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.2(@types/node@22.5.1)(terser@5.31.6))
@@ -120,6 +105,33 @@ importers:
       '@antfu/eslint-config':
         specifier: ^2.27.3
         version: 2.27.3(@typescript-eslint/utils@8.3.0(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4))(@vue/compiler-sfc@3.4.38)(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4)
+      '@iconify-json/carbon':
+        specifier: ^1.1.21
+        version: 1.1.37
+      '@iconify-json/heroicons':
+        specifier: ^1.1.20
+        version: 1.1.24
+      '@iconify-json/line-md':
+        specifier: ^1.1.37
+        version: 1.1.40
+      '@iconify-json/mdi':
+        specifier: 1.1.68
+        version: 1.1.68
+      '@iconify-json/ph':
+        specifier: ^1.1.14
+        version: 1.1.14
+      '@iconify-json/simple-icons':
+        specifier: ^1.1.92
+        version: 1.1.114
+      '@iconify-json/solar':
+        specifier: ^1.1.9
+        version: 1.1.10
+      '@iconify-json/twemoji':
+        specifier: ^1.1.12
+        version: 1.1.16
+      '@iconify-json/vscode-icons':
+        specifier: ^1.1.34
+        version: 1.1.37
       '@nuxtjs/eslint-config-typescript':
         specifier: ^12.1.0
         version: 12.1.0(eslint-plugin-import-x@4.1.0(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4))(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4)
@@ -946,6 +958,12 @@ packages:
   '@iconify-json/line-md@1.1.40':
     resolution: {integrity: sha512-czbnFDIQfQyrC7HjFCJbHvmXEliwNKFBk49X/q/yOfIgQmDDc10sd/KXlxEgGW2iu3gJ98/WKLYDZxoWeAhv2Q==}
 
+  '@iconify-json/mdi@1.1.68':
+    resolution: {integrity: sha512-7//TKCiXLU6kNWeOJRTBbisofVO7rF1sD1TZTL4/V9nqlmVNczQ5IOY0GgKOTsitkcTnX9GXgrgbjw3OI5B69w==}
+
+  '@iconify-json/ph@1.1.14':
+    resolution: {integrity: sha512-s1hZVaxIpl40qLEhjqPRMcZl4A3M4fZ+77Fi+VuOb/eKkIHIMutAoBHIR+0a3l7psUweZQGj9hSyL2P5CIj6qA==}
+
   '@iconify-json/simple-icons@1.1.114':
     resolution: {integrity: sha512-KADlAqTH3/vDTVpS+lwDF0pO/RHgaxf40Hata0QLhAPouygLmhQGPj3ojbpUDfoBGPw/WQ1sor38/2PixR2VRg==}
 
@@ -1266,8 +1284,8 @@ packages:
     resolution: {integrity: sha512-KH6wxzsNys69daSO0xUv0LEBAfhwwjK1M+0Cdi1/vxmifCslMIY7lN11B4eywSfscbyVPAYJvANyc7XiVPImBQ==}
     hasBin: true
 
-  '@nuxt/ui-pro@1.4.1':
-    resolution: {integrity: sha512-ab+SNjyWHQTH23/WJD0gDE2p6FoF5zEshij4HFAhkco7x5w1HeGMtyLDUlzDb95zIaxAC+Mj5EP+ytBH/McJrg==}
+  '@nuxt/ui-pro@1.3.0':
+    resolution: {integrity: sha512-dfsToWIduXuByxhdY8PTzq6J1oFyAnTFG6klxmSF9iORvhIOsE61uXD3Nuz0jq/i7eXZw9LUWiAlyE0nhGOd9Q==}
 
   '@nuxt/ui@2.18.4':
     resolution: {integrity: sha512-NzFUzh5Izd7mduhYhFBlIOcqE8aY+9mbSQ0n8sIASpASv162VJ46OsR5Jm5sbfhKDrgv7UsBk6VKXJXiEI7ThQ==}
@@ -1394,6 +1412,11 @@ packages:
   '@parcel/watcher@2.4.1':
     resolution: {integrity: sha512-HNjmfLQEVRZmHRET336f20H/8kOozUGwk7yajvsonjNxbj2wBTK1WsQuHkD5yYh9RxFGL2EyDHryOihOwUoKDA==}
     engines: {node: '>= 10.0.0'}
+
+  '@pinia-plugin-persistedstate/nuxt@1.2.1':
+    resolution: {integrity: sha512-q8s+4aQW/AjBMyeqLL48/qzBR5lcgnvvf1525ovNuKf6Wl9CsoLjPKh/5X8vNoKGwSow4gP7lVmdYPQRypgjgg==}
+    peerDependencies:
+      '@pinia/nuxt': ^0.5.0
 
   '@pinia/nuxt@0.5.4':
     resolution: {integrity: sha512-nNEs2pq6+Ji5qIyRwmeD9LUdctL8aJ8QMVLTYxUc16cXEOcIIN+MSA8Xudsd0lVETYgEAROT5HiBHnOYRDY3yQ==}
@@ -1692,6 +1715,9 @@ packages:
 
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
+
+  '@types/crypto-js@3.1.47':
+    resolution: {integrity: sha512-eI6gvpcGHLk3dAuHYnRCAjX+41gMv1nz/VP55wAe5HtmAKDOoPSfr3f6vkMc08ov1S0NsjvUBxDtHHxqQY1LGA==}
 
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
@@ -5048,6 +5074,11 @@ packages:
   node-cleanup@2.1.2:
     resolution: {integrity: sha512-qN8v/s2PAJwGUtr1/hYTpNKlD6Y9rc4p8KSmJXyGdYGZsDGKXrGThikLFP9OCHFeLeEpQzPwiAtdIvBLqm//Hw==}
 
+  node-downloader-helper@2.1.9:
+    resolution: {integrity: sha512-FSvAol2Z8UP191sZtsUZwHIN0eGoGue3uEXGdWIH5228e9KH1YHXT7fN8Oa33UGf+FbqGTQg3sJfrRGzmVCaJA==}
+    engines: {node: '>=14.18'}
+    hasBin: true
+
   node-emoji@2.1.3:
     resolution: {integrity: sha512-E2WEOVsgs7O16zsURJ/eH8BqhF029wGpEOnv7Urwdo2wmQanOACwJQh0devF9D9RhoZru0+9JXIS0dBXIAz+lA==}
     engines: {node: '>=18'}
@@ -5071,6 +5102,9 @@ packages:
   node-gyp-build@4.8.1:
     resolution: {integrity: sha512-OSs33Z9yWr148JZcbZd5WiAXhh/n9z8TxQcdMhIOlpN9AhWpLfvVFO73+m77bBABQMaY9XSvIa+qk0jlI7Gcaw==}
     hasBin: true
+
+  node-parallel-downloader@1.0.46:
+    resolution: {integrity: sha512-IHrgmYYNbKGrKQQuJX1OoPc7ZvlNR4oTnmDPwYwhCZE5PnIM4pJZmhDDhI82jn1T1SYIE8TvOzcUuv486vmjXw==}
 
   node-releases@2.0.18:
     resolution: {integrity: sha512-d9VeXT4SJ7ZeOqGX6R5EM022wpL+eWPooLI+5UpWn2jCT1aosUQEhQP214x33Wkwx3JQMvIm+tIoVOdodFS40g==}
@@ -5343,6 +5377,11 @@ packages:
   pify@2.3.0:
     resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
     engines: {node: '>=0.10.0'}
+
+  pinia-plugin-persistedstate@3.2.1:
+    resolution: {integrity: sha512-MK++8LRUsGF7r45PjBFES82ISnPzyO6IZx3CH5vyPseFLZCk1g2kgx6l/nW8pEBKxxd4do0P6bJw+mUSZIEZUQ==}
+    peerDependencies:
+      pinia: ^2.0.0
 
   pinia@2.2.2:
     resolution: {integrity: sha512-ja2XqFWZC36mupU4z1ZzxeTApV7DOw44cV4dhQ9sGwun+N89v/XP7+j7q6TanS1u1tdbK4r+1BUx7heMaIdagA==}
@@ -7717,6 +7756,14 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
+  '@iconify-json/mdi@1.1.68':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/ph@1.1.14':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify-json/simple-icons@1.1.114':
     dependencies:
       '@iconify/types': 2.0.0
@@ -8290,9 +8337,8 @@ snapshots:
       - rollup
       - supports-color
 
-  '@nuxt/ui-pro@1.4.1(axios@1.7.5)(magicast@0.3.5)(rollup@4.21.1)(vite@5.4.2(@types/node@22.5.1)(terser@5.31.6))(vue@3.4.38(typescript@5.5.4))':
+  '@nuxt/ui-pro@1.3.0(axios@1.7.5)(magicast@0.3.5)(rollup@4.21.1)(vite@5.4.2(@types/node@22.5.1)(terser@5.31.6))(vue@3.4.38(typescript@5.5.4))':
     dependencies:
-      '@iconify-json/vscode-icons': 1.1.37
       '@nuxt/ui': 2.18.4(axios@1.7.5)(magicast@0.3.5)(rollup@4.21.1)(vite@5.4.2(@types/node@22.5.1)(terser@5.31.6))(vue@3.4.38(typescript@5.5.4))
       '@vueuse/core': 10.11.1(vue@3.4.38(typescript@5.5.4))
       defu: 6.1.4
@@ -8650,6 +8696,18 @@ snapshots:
       '@parcel/watcher-win32-ia32': 2.4.1
       '@parcel/watcher-win32-x64': 2.4.1
 
+  '@pinia-plugin-persistedstate/nuxt@1.2.1(@pinia/nuxt@0.5.4(magicast@0.3.5)(rollup@4.21.1)(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4)))(magicast@0.3.5)(pinia@2.2.2(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4)))(rollup@4.21.1)':
+    dependencies:
+      '@nuxt/kit': 3.13.0(magicast@0.3.5)(rollup@4.21.1)
+      '@pinia/nuxt': 0.5.4(magicast@0.3.5)(rollup@4.21.1)(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4))
+      defu: 6.1.4
+      pinia-plugin-persistedstate: 3.2.1(pinia@2.2.2(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4)))
+    transitivePeerDependencies:
+      - magicast
+      - pinia
+      - rollup
+      - supports-color
+
   '@pinia/nuxt@0.5.4(magicast@0.3.5)(rollup@4.21.1)(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4))':
     dependencies:
       '@nuxt/kit': 3.13.0(magicast@0.3.5)(rollup@4.21.1)
@@ -8919,6 +8977,8 @@ snapshots:
   '@types/connect@3.4.38':
     dependencies:
       '@types/node': 22.5.1
+
+  '@types/crypto-js@3.1.47': {}
 
   '@types/debug@4.1.12':
     dependencies:
@@ -13292,6 +13352,8 @@ snapshots:
 
   node-cleanup@2.1.2: {}
 
+  node-downloader-helper@2.1.9: {}
+
   node-emoji@2.1.3:
     dependencies:
       '@sindresorhus/is': 4.6.0
@@ -13308,6 +13370,10 @@ snapshots:
   node-forge@1.3.1: {}
 
   node-gyp-build@4.8.1: {}
+
+  node-parallel-downloader@1.0.46:
+    dependencies:
+      '@types/crypto-js': 3.1.47
 
   node-releases@2.0.18: {}
 
@@ -13684,6 +13750,10 @@ snapshots:
   picomatch@4.0.2: {}
 
   pify@2.3.0: {}
+
+  pinia-plugin-persistedstate@3.2.1(pinia@2.2.2(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4))):
+    dependencies:
+      pinia: 2.2.2(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4))
 
   pinia@2.2.2(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4)):
     dependencies:

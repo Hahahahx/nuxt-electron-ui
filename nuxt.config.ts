@@ -15,13 +15,14 @@ export default defineNuxtConfig({
         autoImports: ['defineStore', 'acceptHMRUpdate'],
       },
     ],
+    '@pinia-plugin-persistedstate/nuxt',
     '@vueuse/nuxt',
     '@nuxt/image',
     '@formkit/auto-animate',
   ],
   ui: {
     global: true,
-    // icons: ['heroicons', 'simple-icons', 'solar', 'carbon', 'vscode-icons', 'line-md'],
+    // icons: ['heroicons', 'simple-icons', 'solar', 'carbon', 'vscode-icons', 'line-md', 'mdi'],
     safelistColors: ['primary', 'red', 'orange', 'green'],
   },
 
@@ -36,7 +37,11 @@ export default defineNuxtConfig({
     presets: [
       {
         from: 'zod',
-        imports: ['z'],
+        imports: ['z', {
+          name: 'infer',
+          as: 'ZodInfer',
+          type: true,
+        }],
       },
     ],
   },

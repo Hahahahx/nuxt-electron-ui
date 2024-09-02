@@ -1,4 +1,4 @@
-import queryString from 'query-string'
+import queryString from 'qs'
 
 export const baseURL = {
   v1: '',
@@ -6,6 +6,11 @@ export const baseURL = {
 
 async function post<T>(method: 'POST' | 'PATCH' | 'PUT', url: string, data?: any, opts: { [k: string]: any } = { headers: {} }) {
   const headers = opts.headers ?? {}
+
+  console.log('request url:', storage.GetItem('addr') + url)
+  console.log('request data:', data)
+  console.log('request Authorization:', storage.GetItem('token') ?? '')
+
   const res = await $fetch<T>(storage.GetItem('addr') + url, {
     method,
     body: data,

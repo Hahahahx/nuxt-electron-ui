@@ -23,11 +23,18 @@ export default <Partial<Config>> {
     'bg-rose-500',
     'bg-orange-500',
     'bg-yellow-500',
+
+    'i-solar-display-bold-duotone',
+    'i-solar-archive-down-bold-duotone',
+    'i-solar-archive-up-bold-duotone',
+    'i-solar-archive-bold-duotone',
+    'i-solar-database-bold-duotone',
+    'i-mdi-window-close',
+    'i-mdi-window-open',
+    'i-mdi-window-minimize',
+    'i-mdi-window-maximize',
+
   ],
   prefix: '',
-
-  content: [
-    'docs/content/**/*.md',
-  ],
   plugins: [animate, forms, aspectRatio, scrollbar, typography, containerQueries],
 }

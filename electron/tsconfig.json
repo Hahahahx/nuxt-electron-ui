@@ -25,7 +25,7 @@
     // "moduleDetection": "auto",                        /* Control what method is used to detect module-format JS files. */
 
     /* Modules */
-    "module": "commonjs" /* Specify what module code is generated. */,
+    "module": "CommonJS" /* Specify what module code is generated. */,
 
     /* Type Checking */
     "strict": true /* Enable all strict type-checking options. */,
