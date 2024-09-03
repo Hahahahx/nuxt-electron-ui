@@ -21,7 +21,9 @@ async function onSubmit() {
   await props.onSubmit({
     mountOpt: {},
     mountType: '',
-    vfsOpt: {},
+    vfsOpt: {
+      CacheMode: 2,
+    },
     ...state,
   })
 }

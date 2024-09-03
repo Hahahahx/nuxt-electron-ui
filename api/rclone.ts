@@ -17,6 +17,10 @@ export const Api = {
       fs: string
       remote: string
     }) => request.post('/operations/mkdir', params),
+    delete: (params: {
+      fs: string
+      remote: string
+    }) => request.post('/operations/deletefile', params),
     upload: (file: File, query: {
       fs: string
       remote: string

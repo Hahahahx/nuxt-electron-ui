@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  onCreate: (data: ZodInfer<typeof schema>) => Promise<void>
+  onCreate: (data: { name: string }) => Promise<void>
 }>()
 
 const modal = useModal()
@@ -16,7 +16,9 @@ const state = reactive({
 })
 
 async function onSubmit(values: ZodInfer<typeof schema>) {
-  await props.onCreate(values)
+  await props.onCreate({
+    name: state.name,
+  })
   modal.close()
 }
 </script>

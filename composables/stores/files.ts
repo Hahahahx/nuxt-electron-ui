@@ -93,6 +93,7 @@ export const useFileStore = defineStore('files', {
     },
     updateDowwloadStatus(url: string, status: DH_STATES) {
       const index = this.downloads.findIndex(f => f.url === url)
+      console.log('修改文件状态', url, status)
       if (index !== -1) {
         this.downloads[index].status = status
         return this.downloads[index]
@@ -123,7 +124,7 @@ export const useFileStore = defineStore('files', {
           size: f.size,
           path: f.path,
           params: {
-            fs: `${path.value.fs}:`,
+            fs: `${path.value.fs}`,
             remote: path.value.prefix,
           },
           insertTime: new Date(),

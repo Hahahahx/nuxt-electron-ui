@@ -54,7 +54,7 @@ export const request = {
     let uploadedSize = 0
 
     // $fetch 上传会报错
-    const res = fetch(`${storage.GetItem('addr') + params.url}?${queryString.stringify(params.query)}`, {
+    const res = fetch(`${storage.GetItem('addr') + params.url}?${queryString.stringify(params.query, { encode: false })}`, {
       method: 'post',
       // query: params.query,
       body: formData,

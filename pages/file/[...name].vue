@@ -2,12 +2,11 @@
 import { RcloneFileCreate, RcloneFileUpload, UIcon } from '#components'
 
 const path = useCurrentPath()
-
 const modal = useModal()
+const files = useFileStore()
 
-const object = useObjectsStore()
 const { data, pending, refresh } = useAsyncData(() => Api.operations.list({
-  fs: `${path.value.fs}:`,
+  fs: path.value.fs,
   remote: path.value.prefix,
 }), {
   default: () => ({
@@ -15,12 +14,14 @@ const { data, pending, refresh } = useAsyncData(() => Api.operations.list({
   }),
 })
 
+effect(() => {
+  if (files.files.filter(i => i.status === 'pending').length > 0) {
+    refresh()
+  }
+})
+
 const search = ref('')
 const type = ref(0)
-
-effect(() => {
-  console.log(object.objects)
-})
 
 const list = computed(() => {
   let arr: Files.Item[] = []
@@ -52,8 +53,10 @@ const list = computed(() => {
 const alert = useAlert()
 
 const onCreate = alert.catch(async (value: { name: string }) => {
+  console.log(value)
+
   await Api.operations.mkdir({
-    fs: `${path.value.fs}:`,
+    fs: `${path.value.fs}`,
     remote: [...path.value.prefixs, value.name].join('/'),
   })
   await refresh()

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 const files = useFileStore()
 const electron = useElectron()
-function openfile(path: string) {
+function openfile(path: string, filename: string) {
   electron.actions?.openFile({
-    paths: [path],
+    paths: [path, filename],
   })
 }
 </script>
@@ -61,7 +61,7 @@ function openfile(path: string) {
           </UBadge>
         </div>
         <Flex class="gap-1">
-          <UButton :disabled="f.percent !== 100" size="xs" class="font-bold text-xs text-primary" variant="ghost" @click="openfile(f.path)">
+          <UButton :disabled="f.percent !== 100" size="xs" class="font-bold text-xs text-primary" variant="ghost" @click="openfile(f.path, f.name)">
             <span class="font-bold text-xs tracking-[2px]">打开</span>
           </UButton>
 

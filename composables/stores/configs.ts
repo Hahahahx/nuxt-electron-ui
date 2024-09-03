@@ -1,7 +1,38 @@
+export interface Task {
+  name: string
+  fromFs: string
+  fromRemote: string
+  toFs: string
+  toRemote: string
+  interval: number
+}
+
 export const useConfigsStore = defineStore('configs', {
-  state: (): any => ({
+  state: (): {
+    task: Task[]
+  } => ({
+    task: [],
   }),
   actions: {
+    async listTask() {
+      const electron = useElectron()
+      const res = await electron.schedule?.list()
+      this.task = res
+      return res
+    },
+    async addTask(task: Task) {
+      const electron = useElectron()
+      const res = await electron.schedule?.add(task)
+      this.task.push(task)
+      return res
+    },
+    async removeTask(task: Task) {
+      const electron = useElectron()
+      const res = await electron.schedule?.remove(task)
+      this.task = this.task.filter(item => item.name !== task.name)
+      return res
+    },
+
     async runRclone() {
       const rclone = useRcloneStore()
 
@@ -37,7 +68,7 @@ export const useConfigsStore = defineStore('configs', {
 
   },
   persist: {
-    storage: persistedState.sessionStorage,
+    storage: persistedState.localStorage,
   },
 })
 

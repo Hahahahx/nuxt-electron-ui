@@ -11,7 +11,7 @@ const electron = useElectron()
 
 const downloadUrl = computed(() => {
   const url = Api.operations.download({
-    url: (`/[${encodeURI(path.value.fs)}:${encodeURI(path.value.prefixs.at(0) ?? '')}]/${encodeURI(props.file.Name)}`),
+    url: (`/[${encodeURI(path.value.fs)}]/${encodeURI([...path.value.prefixs, props.file.Name].join('/'))}`),
   })
   return url
 })
@@ -20,20 +20,17 @@ const downloadFile = computed(() => {
   return files.downloads.find(item => item.url === downloadUrl.value)
 })
 
+effect(() => {
+  console.log(downloadFile.value)
+})
+
 function download() {
   alert.info('正在下载中，请稍后打开')
   files.downloadFile(downloadUrl.value, props.file)
 }
 
 const isDir = computed(() => !!props.file.IsDir)
-const isLocal = computed(() => rclone.currentConfig?.config.type === 'local')
-
-// effect(() => {
-// console.log(downloadUrl.value)
-//   console.log(isDir.value)
-//   console.log(isLocal.value)
-//   console.log(props.file)
-// })
+const isLocal = computed(() => rclone.currentConfig?.config.type === 'local' || downloadFile.value?.status === DH_STATES.FINISHED)
 
 const name = computed(() => {
   return props.file.Name
@@ -41,15 +38,22 @@ const name = computed(() => {
 
 function fileOpen() {
   if (isDir.value) {
-    navigateTo(`/file/${path.value.fs}/${props.file.Path}`)
+    navigateTo(`/file/${path.value.fsBase}/${props.file.Path}`)
   }
-  else if (rclone.currentConfig?.config.type !== 'local') {
+  else if (!isLocal.value) {
     download()
   }
   else {
-    electron.actions?.openFile({
-      paths: [rclone.currentConfig?.config.root_folder_path ?? '', props.file.Path], // downloadFile.value.realPath,
-    })
+    if (rclone.currentConfig?.config.type === 'local') {
+      electron.actions?.openFile({
+        paths: [rclone.currentConfig?.config.root_folder_path ?? '', props.file.Path], // downloadFile.value.realPath,
+      })
+    }
+    else {
+      electron.actions?.openFile({
+        paths: [downloadFile.value?.path ?? '', props.file.Name],
+      })
+    }
   }
 }
 
@@ -64,60 +68,63 @@ const menu = [[
     icon: 'ph:arrow-square-in-duotone',
     click: fileOpen,
   },
-  {
-    label: '复制路径',
-    icon: 'ph:copy-duotone',
-    click: () => {
-      console.log('copy path')
-    },
-  },
-  {
-    label: '属性',
-    icon: 'ph:shield-warning-duotone',
-    click: () => {
-      console.log('property')
-    },
-  },
+  // {
+  //   label: '复制路径',
+  //   icon: 'ph:copy-duotone',
+  //   click: () => {
+  //     console.log('copy path')
+  //   },
+  // },
+  // {
+  //   label: '属性',
+  //   icon: 'ph:shield-warning-duotone',
+  //   click: () => {
+  //     console.log('property')
+  //   },
+  // },
 ].filter(i => !!i), [
   !isDir.value && !isLocal.value && {
     label: '下载',
     icon: 'ph:download-simple-duotone',
     click: () => download(),
   },
-  {
-    label: '重命名',
-    icon: 'ph:textbox-duotone',
-    click: () => {
-      console.log('rename')
-    },
-  },
-  {
-    label: '复制',
-    icon: 'ph:copy-simple-duotone',
-    click: () => {
-      console.log('copy')
-    },
-  },
-  {
-    label: '移动',
-    icon: 'ph:arrow-bend-double-up-left-duotone',
-    click: () => {
-      console.log('move')
-    },
-  },
-  {
-    label: '分享',
-    icon: 'ph:share-network-duotone',
-    click: () => {
-      console.log('share')
-    },
-  },
+  // {
+  //   label: '重命名',
+  //   icon: 'ph:textbox-duotone',
+  //   click: () => {
+  //     console.log('rename')
+  //   },
+  // },
+  // {
+  //   label: '复制',
+  //   icon: 'ph:copy-simple-duotone',
+  //   click: () => {
+  //     console.log('copy')
+  //   },
+  // },
+  // {
+  //   label: '移动',
+  //   icon: 'ph:arrow-bend-double-up-left-duotone',
+  //   click: () => {
+  //     console.log('move')
+  //   },
+  // },
+  // {
+  //   label: '分享',
+  //   icon: 'ph:share-network-duotone',
+  //   click: () => {
+  //     console.log('share')
+  //   },
+  // },
   {
     label: '删除',
     icon: 'ph:trash-duotone',
-    click: () => {
-      console.log('delete')
-    },
+    click: alert.catch(async () => {
+      await Api.operations.delete({
+        fs: path.value.fs,
+        remote: path.value.prefix,
+      })
+    }),
   },
 ].filter(i => !!i)]
 
@@ -127,7 +134,7 @@ function onDoubleClick() {
 </script>
 
 <template>
-  <ContextMenu :menu="menu">
+  <ContextMenu :menu="menu as any">
     <UPopover mode="hover" :popper="{ placement: 'bottom' }">
       <div
         class="flex flex-col items-center transition-all duration-200 cursor-pointer hover:opacity-60 group"

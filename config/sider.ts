@@ -52,11 +52,18 @@ export const sider = [
   },
   {
     group: '系统配置',
-    list: [{
-      to: '/mount',
-      icon: 'i-solar-display-bold-duotone',
-      label: '挂载列表',
-    }],
+    list: [
+      {
+        to: '/mount',
+        icon: 'i-solar-display-bold-duotone',
+        label: '挂载列表',
+      },
+      {
+        to: '/time',
+        icon: 'i-solar-alarm-bold-duotone',
+        label: '定时任务',
+      },
+    ],
   },
 ]
 

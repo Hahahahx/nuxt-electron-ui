@@ -1,5 +1,5 @@
 import type { DH_STATES } from './stores/files'
-import { type RcloneRunParams, RcloneServiceEvent, type ServiceResult, type WindowDownloadParams, type WindowOpenParams, WindowServiceEvent } from '~/electron/event'
+import { type RcloneRunParams, RcloneServiceEvent, type ScheduleAddParams, type ScheduleDeleteParams, ScheduleServiceEvent, type ServiceResult, type WindowDownloadParams, type WindowOpenParams, WindowServiceEvent } from '~/electron/event'
 
 export default function useElectron() {
   const isServer = import.meta.server || typeof window === 'undefined' || typeof window.require === 'undefined'
@@ -32,6 +32,12 @@ export default function useElectron() {
       addr: string
       token: string
     }>> => electron.ipcRenderer.invoke(RcloneServiceEvent.Run, params),
+  }
+
+  const schedule = {
+    add: (params: ScheduleAddParams) => electron.ipcRenderer.invoke(ScheduleServiceEvent.ScheduleAdd, params),
+    remove: (params: ScheduleDeleteParams) => electron.ipcRenderer.invoke(ScheduleServiceEvent.ScheduleDelete, params),
+    list: () => electron.ipcRenderer.invoke(ScheduleServiceEvent.ScheduleList),
   }
 
   // Window title bar stats
@@ -67,11 +73,12 @@ export default function useElectron() {
 
   electron.ipcRenderer.on(WindowServiceEvent.DownloadStatus_Changed, (_event, value: ServiceResult<{
     url: string
-    status: DH_STATES
+    state: DH_STATES
   }>) => {
-    files.updateDowwloadStatus(value.data!.url, value.data!.status)
+    console.log(value)
+    files.updateDowwloadStatus(value.data!.url, value.data!.state)
   })
 
   // Initialize ipcRenderer
-  return { isElectron, actions, rclone, windowStats }
+  return { isElectron, actions, rclone, schedule, windowStats }
 }
