@@ -2,9 +2,9 @@
 const alert = useAlert()
 const rclone = useRcloneStore()
 const { loading } = useRequest(rclone.listConfig, {
-  onError(error) {
-    alert.error(error)
-  },
+  // onError(error) {
+  // alert.error(error)
+  // },
 })
 const search = ref('')
 
