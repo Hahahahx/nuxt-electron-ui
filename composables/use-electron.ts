@@ -37,7 +37,7 @@ export default function useElectron() {
   const schedule = {
     add: (params: ScheduleAddParams) => electron.ipcRenderer.invoke(ScheduleServiceEvent.ScheduleAdd, params),
     remove: (params: ScheduleDeleteParams) => electron.ipcRenderer.invoke(ScheduleServiceEvent.ScheduleDelete, params),
-    list: () => electron.ipcRenderer.invoke(ScheduleServiceEvent.ScheduleList),
+    list: (): Promise<ServiceResult<Task[]>> => electron.ipcRenderer.invoke(ScheduleServiceEvent.ScheduleList),
   }
 
   // Window title bar stats

@@ -52,10 +52,14 @@ function menus(row: Task) {
     }],
   ]
 }
+
+async function onCreate(task: Task) {
+  await configs.addTask(task)
+}
 </script>
 
 <template>
-  <LayoutPage :loading="loading" :empty="configs.task.length === 0">
+  <LayoutPage :loading="false" :empty="configs.task.length === 0">
     <template #empty>
       <Flex direction="col" justify-content="center" align-items="center" class="h-full gap-4">
         <img src="/images/system/logo.svg" alt="" class="w-24">
@@ -69,17 +73,14 @@ function menus(row: Task) {
             </p>
           </div>
         </Flex>
-        <UButton class="font-bold" @click="$router.push('/config')">
-          添加定时任务
-        </UButton>
+        <RcloneScheduleCreate :on-submit="onCreate" />
       </Flex>
     </template>
     <Flex direction="col" class="gap-4 pt-2 h-full">
       <Flex justify-content="between" class="w-full px-4">
         <Search v-model="search" />
-        <UButton class="font-bold" @click="$router.push('/config')">
-          添加定时任务
-        </UButton>
+
+        <RcloneScheduleCreate :on-submit="onCreate" />
       </Flex>
       <TableBase
         $page-index="pageIndex"
@@ -91,7 +92,22 @@ function menus(row: Task) {
         :page-total="configs.task.length"
         :columns="columns"
         :menus="menus"
-      />
+        :refresh="refetch"
+      >
+        <template #fromFs-data="{ row }">
+          {{ row.fromFs }}
+          <UBadge variant="soft">
+            {{ row.fromRemote }}
+          </UBadge>
+        </template>
+
+        <template #toFs-data="{ row }">
+          {{ row.toFs }}
+          <UBadge variant="soft">
+            {{ row.toRemote }}
+          </UBadge>
+        </template>
+      </TableBase>
     </Flex>
   </LayoutPage>
 </template>

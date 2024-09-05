@@ -20,7 +20,7 @@ function openfile(path: string, filename: string) {
   <UDivider class="my-5" />
   <UAccordion
     multiple
-    :items="files.downloads as any[]" class="my-2" :ui="{
+    :items="files.downloads as any[]" class="my-2 overflow-y-auto" :ui="{
       container: ' hover:bg-gray-500/5 my-2',
     }"
   >

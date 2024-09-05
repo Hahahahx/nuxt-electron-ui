@@ -14,6 +14,9 @@ const items = [{
 }, {
   slot: 'osca',
   label: 'OSCA对象存储',
+}, {
+  slot: 's3',
+  label: 'S3对象存储',
 }]
 
 const selected = ref(1)
@@ -26,7 +29,7 @@ const selected = ref(1)
         <div class="flex items-center gap-4 cursor-pointer" @click="$router.push('/config')">
           <UButton icon="solar:alt-arrow-left-line-duotone" variant="ghost">
             <h1 class="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0">
-              配置管理
+              文件管理
             </h1>
           </UButton>
           <UBadge variant="outline" class="ml-auto sm:ml-0">
@@ -46,7 +49,10 @@ const selected = ref(1)
         <RcloneConfigCreateLocalForm v-if="selected === 0" id="config-create-form" @submit="onSubmit" />
       </template>
       <template #osca>
-        <RcloneConfigCreateS3Form v-if="selected === 1" id="config-create-form" @submit="onSubmit" />
+        <RcloneConfigCreateOscaForm v-if="selected === 1" id="config-create-form" @submit="onSubmit" />
+      </template>
+      <template #s3>
+        <RcloneConfigCreateS3Form v-if="selected === 2" id="config-create-form" @submit="onSubmit" />
       </template>
     </UTabs>
 

@@ -34,18 +34,24 @@ async function onSubmit() {
   <UForm class="space-y-4  w-full" :state="state" :schema="schema" @submit="onSubmit">
     <ClientOnly>
       <teleport to="#config-create-form-header">
-        <UCard class=" border-0">
-          <CardHeader>
-            <CardTitle>存储名称</CardTitle>
-            <CardDescription>
-              配置的名称，用于区分不同的配置
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <UFormGroup required name="name">
-              <UInput v-model="state.name" />
-            </UFormGroup>
-          </CardContent>
+        <UCard
+          :ui="{
+            background: 'bg-gray-100 dark:bg-gray-950/50',
+          }"
+        >
+          <template #header>
+            <div>
+              <h3 class="text-xl font-bold leading-6">
+                存储名称
+              </h3>
+              <p class="mt-1 text-sm text-gray-500">
+                配置的名称，用于区分不同的配置
+              </p>
+            </div>
+          </template>
+          <UFormGroup required name="name">
+            <UInput v-model="state.name" />
+          </UFormGroup>
         </UCard>
       </teleport>
     </ClientOnly>

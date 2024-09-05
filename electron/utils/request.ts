@@ -29,6 +29,9 @@ export type Handler<Params, Return> = (event: {
 
 export function RequestHandler<T>(type: ServiceEvent, handle: Handler<T, any>) {
   ipcMain.handle(type, async (event, params: T) => {
+    console.log(`----------------------------------------------------------------${type}`)
+    console.log(params)
+
     const win = getWindowFromEvent(event)
     if (!win)
       return result.Error('window not found')

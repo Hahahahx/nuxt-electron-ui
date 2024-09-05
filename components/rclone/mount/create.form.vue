@@ -31,7 +31,9 @@ async function onSubmit() {
 
 <template>
   <UTooltip text="挂载">
-    <UButton icon="solar:database-bold-duotone" variant="ghost" @click.prevent="open = true" />
+    <UButton class="font-bold" @click.prevent="open = true">
+      添加挂载点
+    </UButton>
   </UTooltip>
 
   <UDashboardModal

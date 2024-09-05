@@ -5,18 +5,16 @@ const props = defineProps<{
 
 const schema = z.object({
   name: z.string().min(1, '存储名称不能为空'),
-  endpoint: z.string().min(1, 'Endpoint不能为空'),
+  endpoint: z.string().min(1, '文件网关不能为空'),
   access_key_id: z.string().min(1, 'Access Key ID不能为空'),
   secret_access_key: z.string().min(1, 'Secret Access Key不能为空'),
   bucket: z.string().optional(),
-  force_path_style: z.boolean().optional(),
 })
 
 const state = reactive({
-  name: 'New_S3',
-  endpoint: '',
+  name: 'New_OSCA',
+  endpoint: 'http://ocloud.ihep.ac.cn:6100',
   access_key_id: '',
-  force_path_style: false,
   secret_access_key: '',
   bucket: '',
 })
@@ -72,9 +70,9 @@ async function onSubmit(values: ZodInfer<typeof schema>) {
       </teleport>
     </ClientOnly>
     <div class="pb-6 typography-muted">
-      S3协议是Amazon定义的一套用于在云环境中进行对象存储操作的标准API接口，支持包括上传、下载、检索、管理对象及其元数据在内的多种功能，已被众多云存储提供商广泛采用作为兼容接口。
+      OSCA联盟云，是由开发科学计算联盟所组成的提供ZB级多模态海量大数据安全可靠、快捷灵活的一站式存储服务，推动新一代广域网专用云服务的发展
     </div>
-    <UFormGroup label="Endpoint" required name="endpoint">
+    <UFormGroup label="文件网关" required name="endpoint">
       <UInput v-model="state.endpoint" />
     </UFormGroup>
     <UFormGroup label="AccessKey" required name="access_key_id">
@@ -85,9 +83,6 @@ async function onSubmit(values: ZodInfer<typeof schema>) {
     </UFormGroup>
     <UFormGroup label="桶名称" name="bucket">
       <UInput v-model="state.bucket" />
-    </UFormGroup>
-    <UFormGroup name="force_path_style">
-      <UCheckbox v-model="state.force_path_style" label="路径模式" help="默认情况下为虚拟主机模式" />
     </UFormGroup>
   </UForm>
 </template>

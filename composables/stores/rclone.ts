@@ -14,6 +14,13 @@ export const useRcloneStore = defineStore('rclone-data', {
     currentConfig: undefined,
   }),
   actions: {
+    getBasicPath(config?: RcloneConfig) {
+      if (!config) {
+        return ''
+      }
+
+      return config.config.type === 'local' ? config.config.root_folder_path : config.config.bucket
+    },
     async listConfig() {
       const configs = await Api.config.dump()
 

@@ -9,6 +9,7 @@ import { isMac, isProd, platform } from './utils/platform'
 import { Module } from './utils/module'
 import WindowModule from './modules/window'
 import RcloneModule from './modules/rclone'
+import ScheduleModule from './modules/schedule'
 
 // Initilize
 // =========
@@ -81,6 +82,7 @@ app.whenReady().then(async () => {
   moduleService.Init(mainWindow, [
     WindowModule,
     RcloneModule,
+    ScheduleModule,
   ])
 
   // Initialize modules

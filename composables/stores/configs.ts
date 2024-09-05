@@ -4,7 +4,6 @@ export interface Task {
   fromRemote: string
   toFs: string
   toRemote: string
-  interval: number
 }
 
 export const useConfigsStore = defineStore('configs', {
@@ -17,7 +16,9 @@ export const useConfigsStore = defineStore('configs', {
     async listTask() {
       const electron = useElectron()
       const res = await electron.schedule?.list()
-      this.task = res
+
+      console.log(res)
+      this.task = res?.data || []
       return res
     },
     async addTask(task: Task) {
@@ -28,7 +29,9 @@ export const useConfigsStore = defineStore('configs', {
     },
     async removeTask(task: Task) {
       const electron = useElectron()
-      const res = await electron.schedule?.remove(task)
+      const res = await electron.schedule?.remove({
+        name: task.name,
+      })
       this.task = this.task.filter(item => item.name !== task.name)
       return res
     },

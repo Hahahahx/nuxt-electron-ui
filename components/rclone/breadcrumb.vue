@@ -5,9 +5,10 @@ const path = useCurrentPath()
 
 const items = computed(() => {
   return [
-    { to: `/file/${path.value.bucketName}`, label: path.value.bucketName, icon: 'ph:house-line-duotone' },
+    { to: `/config`, label: '文件管理', icon: 'ph:house-line-duotone' },
+    { to: `/config/file/${path.value.bucketName}`, label: path.value.bucketName },
     ...path.value.prefixs.map((prefix, index) => {
-      return { to: `/file/${path.value.bucketName}/${path.value.prefixs.slice(0, index + 1).join('/')}`, label: prefix }
+      return { to: `/config/file/${path.value.bucketName}/${path.value.prefixs.slice(0, index + 1).join('/')}`, label: prefix }
     }),
   ]
 })
@@ -27,11 +28,11 @@ const configs = computed(() => {
     divider="/"
     :links="items"
   >
-    <template #default="{ link, index }">
+    <!-- <template #default="{ link, index }">
       <UDropdown v-if="index === 0" mode="hover" :items="configs" :popper="{ placement: 'bottom-start' }">
         <UButton class="font-bold" color="white" variant="ghost" :label="link.label" trailing-icon="i-heroicons-chevron-down-20-solid" />
       </UDropdown>
       <span v-else>{{ link.label }}</span>
-    </template>
+    </template> -->
   </UBreadcrumb>
 </template>

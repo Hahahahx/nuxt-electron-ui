@@ -57,17 +57,25 @@ function fileOpen() {
   }
 }
 
-const menu = [[
-  {
-    label: props.file.Name,
-    disabled: true,
-    labelClass: 'max-w-[160px] p-2 bg-gray-500/20 rounded w-full min-w-[100px] text-center',
-  },
-  isLocal.value && {
-    label: '打开',
-    icon: 'ph:arrow-square-in-duotone',
-    click: fileOpen,
-  },
+const onDelete = alert.catch(async () => {
+  await Api.operations.delete({
+    fs: path.value.fs,
+    remote: path.value.prefix,
+  })
+})
+
+const menu = computed(() => {
+  return [[
+    {
+      label: props.file.Name,
+      disabled: true,
+      labelClass: 'max-w-[160px] p-2 bg-gray-500/20 rounded w-full min-w-[100px] text-center',
+    },
+    isLocal.value && {
+      label: '打开',
+      icon: 'ph:arrow-square-in-duotone',
+      click: fileOpen,
+    },
   // {
   //   label: '复制路径',
   //   icon: 'ph:copy-duotone',
@@ -82,51 +90,47 @@ const menu = [[
   //     console.log('property')
   //   },
   // },
-].filter(i => !!i), [
-  !isDir.value && !isLocal.value && {
-    label: '下载',
-    icon: 'ph:download-simple-duotone',
-    click: () => download(),
-  },
-  // {
-  //   label: '重命名',
-  //   icon: 'ph:textbox-duotone',
-  //   click: () => {
-  //     console.log('rename')
-  //   },
-  // },
-  // {
-  //   label: '复制',
-  //   icon: 'ph:copy-simple-duotone',
-  //   click: () => {
-  //     console.log('copy')
-  //   },
-  // },
-  // {
-  //   label: '移动',
-  //   icon: 'ph:arrow-bend-double-up-left-duotone',
-  //   click: () => {
-  //     console.log('move')
-  //   },
-  // },
-  // {
-  //   label: '分享',
-  //   icon: 'ph:share-network-duotone',
-  //   click: () => {
-  //     console.log('share')
-  //   },
-  // },
-  {
-    label: '删除',
-    icon: 'ph:trash-duotone',
-    click: alert.catch(async () => {
-      await Api.operations.delete({
-        fs: path.value.fs,
-        remote: path.value.prefix,
-      })
-    }),
-  },
-].filter(i => !!i)]
+  ].filter(i => !!i), [
+    !isDir.value && !isLocal.value && {
+      label: '下载',
+      icon: 'ph:download-simple-duotone',
+      click: () => download(),
+    },
+    // {
+    //   label: '重命名',
+    //   icon: 'ph:textbox-duotone',
+    //   click: () => {
+    //     console.log('rename')
+    //   },
+    // },
+    // {
+    //   label: '复制',
+    //   icon: 'ph:copy-simple-duotone',
+    //   click: () => {
+    //     console.log('copy')
+    //   },
+    // },
+    // {
+    //   label: '移动',
+    //   icon: 'ph:arrow-bend-double-up-left-duotone',
+    //   click: () => {
+    //     console.log('move')
+    //   },
+    // },
+    // {
+    //   label: '分享',
+    //   icon: 'ph:share-network-duotone',
+    //   click: () => {
+    //     console.log('share')
+    //   },
+    // },
+    {
+      label: '删除',
+      icon: 'ph:trash-duotone',
+      click: onDelete,
+    },
+  ].filter(i => !!i)]
+})
 
 function onDoubleClick() {
   fileOpen()

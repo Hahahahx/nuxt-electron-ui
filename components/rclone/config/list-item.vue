@@ -2,12 +2,11 @@
 defineProps<{
   config: RcloneConfig
   onDelete: () => Promise<void>
-  onMount: (data: Mount.Add) => Promise<void>
 }>()
 </script>
 
 <template>
-  <NuxtLink :href="`/config/detail/${config.name}`" class="w-full transition-all duration-200 ease-in-out ">
+  <NuxtLink :href="`/config/file/${config.name}`" class="w-full transition-all duration-200 ease-in-out ">
     <Flex
       class="w-full bg-gray-100/80 dark:bg-gray-900 px-5 py-4 rounded-md border-[1px] border-gray-200/80 dark:border-gray-800/80"
       align-items="center"
@@ -25,10 +24,13 @@ defineProps<{
         </div>
       </Flex>
       <Flex align-items="center" class="gap-2">
-        <RcloneMountCreateForm :fs="config.name" @submit="onMount" />
+        <!-- <RcloneMountCreateForm :fs="config.name" @submit="onMount" /> -->
 
+        <UTooltip text="挂载">
+          <UButton icon="solar:database-bold-duotone" variant="ghost" @click.prevent="$router.push(`/config/mount/${config.name}`)" />
+        </UTooltip>
         <UTooltip text="浏览">
-          <UButton variant="ghost" icon="solar:login-3-bold-duotone" @click.prevent="$router.push(`/file/${config.name}`)" />
+          <UButton variant="ghost" icon="solar:login-3-bold-duotone" @click.prevent="$router.push(`/config/file/${config.name}`)" />
         </UTooltip>
         <RcloneConfigDeleteAlert :on-submit="onDelete" />
       </Flex>

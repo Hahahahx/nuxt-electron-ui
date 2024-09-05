@@ -8,7 +8,7 @@ const Platform = builder.Platform
 const options = {
   appId: 'com.app.id',
   asar: true,
-  productName: 'electron-nuxt3',
+  productName: 'OSCA联盟云存储',
   // protocols: {
   // name: 'Your deeplink',
   // - Don't forget to set `MimeType: "x-scheme-handler/deeplink"` for `linux.desktop` entry!

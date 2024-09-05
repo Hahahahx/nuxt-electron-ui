@@ -171,6 +171,7 @@ export const useFileStore = defineStore('files', {
 
   },
   persist: {
+    storage: persistedState.localStorage,
     // storage: persistedState.sessionStorage,
   },
 })

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const alert = useAlert()
 const rclone = useRcloneStore()
-const electron = useElectron()
 const { loading } = useRequest(rclone.listConfig, {
   onError(error) {
     alert.error(error)
@@ -18,13 +17,6 @@ const list = computed(() => {
 
 const onDelete = alert.catch(async (params: RcloneConfig) => {
   await rclone.removeConfig(params)
-})
-
-const onMount = alert.catch(async (params: Mount.Add) => {
-  await Api.mount.add(params)
-  electron.actions?.openFile({
-    paths: [params.mountPoint],
-  })
 })
 </script>
 
@@ -57,7 +49,7 @@ const onMount = alert.catch(async (params: Mount.Add) => {
       </Flex>
       <UDivider />
       <Flex direction="col" justify-content="start" align-items="start" class="w-full h-full overflow-y-auto gap-4 px-4">
-        <RcloneConfigListItem v-for="bucket in list" :key="bucket.name" :config="bucket" :on-mount="onMount" :on-delete="() => onDelete(bucket)" />
+        <RcloneConfigListItem v-for="bucket in list" :key="bucket.name" :config="bucket" :on-delete="() => onDelete(bucket)" />
       </Flex>
     </Flex>
   </LayoutPage>
