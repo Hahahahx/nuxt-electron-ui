@@ -15,6 +15,9 @@ const state = reactive({
 })
 
 const open = ref(false)
+const electron = useElectron()
+
+const { data, pending } = useAsyncData(electron.actions!.getDrives)
 
 async function onSubmit() {
   open.value = false
@@ -25,6 +28,7 @@ async function onSubmit() {
       CacheMode: 2,
     },
     ...state,
+    mountPoint: `${state.mountPoint}:`,
   })
 }
 </script>
@@ -51,8 +55,12 @@ async function onSubmit() {
       </UFormGroup>
 
       <UFormGroup label="挂载分区" required name="mountPoint">
-        <UInput v-model="state.mountPoint" placeholder="X:" />
+        <USelect v-model="state.mountPoint" :loading="pending" :options="data?.data?.unused.reverse() ?? []" placeholder="请选择分区" />
       </UFormGroup>
+
+      <!-- <UFormGroup label="挂载点" required name="mountPoint">
+        <UInput v-model="state.mountPoint" placeholder="X:" />
+      </UFormGroup> -->
     </UForm>
     <template #footer>
       <Flex justify-content="end" class="gap-2 w-full">

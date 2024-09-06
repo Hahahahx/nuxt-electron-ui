@@ -19,6 +19,10 @@ export default function useElectron() {
     close: () => electron.ipcRenderer.invoke(WindowServiceEvent.Close),
     openFile: (params: WindowOpenParams) => electron.ipcRenderer.invoke(WindowServiceEvent.OpenFile, params),
     chooseDir: (): Promise<ServiceResult<string[]>> => electron.ipcRenderer.invoke(WindowServiceEvent.ChooseDir),
+    getDrives: (): Promise<ServiceResult<{
+      used: string[]
+      unused: string[]
+    }>> => electron.ipcRenderer.invoke(WindowServiceEvent.GetDrives),
     download: {
       start: (params: WindowDownloadParams) => electron.ipcRenderer.invoke(WindowServiceEvent.Download, params),
       pause: (url: string) => electron.ipcRenderer.invoke(WindowServiceEvent.DownloadPause, url),

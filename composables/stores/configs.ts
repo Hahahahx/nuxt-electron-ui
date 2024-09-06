@@ -64,7 +64,7 @@ export const useConfigsStore = defineStore('configs', {
       storage.SetItem('token', res!.data!.token)
       storage.SetItem('addr', res!.data!.addr)
 
-      await rclone.listConfig()
+      // await rclone.listConfig()
 
       return res
     },

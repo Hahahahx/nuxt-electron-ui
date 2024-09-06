@@ -54,7 +54,7 @@ const options = {
     // 为所有人安装，false的话可以选择为当前用户安装
     perMachine: true,
     // .nsh文件会在程序安装过程执行
-    // "include": "./build/nsis/installer.nsh",
+    include: './scripts/nsis/install-winfsp.nsh',
     // packElevateHelper: true,
     // 允许请求提升。 如果为false，则用户必须使用提升的权限重新启动安装程序。
     allowElevation: true,

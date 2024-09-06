@@ -8,6 +8,7 @@ export enum WindowServiceEvent {
   FullScreen_Changed = 'window-full-screen-changed',
   Restored = 'window-restored',
 
+  GetDrives = 'window-get-drives',
   OpenFile = 'window-open-file',
   ChooseDir = 'window-choose-dir',
   DownloadInit = 'window-download-init',

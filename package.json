@@ -1,11 +1,11 @@
 {
-  "name": "electron-nuxt3",
+  "name": "osca",
   "version": "1.0.0",
   "private": true,
   "packageManager": "pnpm@9.6.0+sha512.38dc6fba8dba35b39340b9700112c2fe1e12f10b17134715a4aa98ccf7bb035e76fd981cf0bb384dfa98f8d6af5481c2bef2f4266a24bfa20c34eb7147ce0b5e",
-  "description": "Nuxt3 + Electron & More",
-  "author": "EternalC0DER",
-  "email": "s.eternalcoder@gmail.com",
+  "description": "osca desktop app",
+  "author": "ArronHux",
+  "email": "1219654535@qq.com",
   "main": ".output/electron/background.js",
   "scripts": {
     "dev:web": "nuxt dev -o",

@@ -9,15 +9,12 @@ const { data, pending, refresh } = useAsyncData(() => Api.operations.list({
   fs: path.value.fs,
   remote: path.value.prefix,
 }), {
+  watch: [
+    () => files.files.filter(i => i.status === 'success').length,
+  ],
   default: () => ({
     list: [],
   }),
-})
-
-effect(() => {
-  if (files.files.filter(i => i.status === 'pending').length > 0) {
-    refresh()
-  }
 })
 
 const search = ref('')
@@ -28,19 +25,19 @@ const list = computed(() => {
 
   switch (type.value) {
     case 0:
-      arr = data.value.list
+      arr = data.value?.list ?? []
       break
     case 1:
-      arr = data.value.list.filter(i => !i.IsDir ? media.images.some(m => i.Name?.endsWith(m)) : i)
+      arr = data.value?.list.filter(i => !i.IsDir ? media.images.some(m => i.Name?.endsWith(m)) : i) ?? []
       break
     case 2:
-      arr = data.value.list.filter(i => !i.IsDir ? media.video.some(m => i.Name?.endsWith(m)) : i)
+      arr = data.value?.list.filter(i => !i.IsDir ? media.video.some(m => i.Name?.endsWith(m)) : i) ?? []
       break
     case 3:
-      arr = data.value.list.filter(i => !i.IsDir ? media.audio.some(m => i.Name?.endsWith(m)) : i)
+      arr = data.value?.list.filter(i => !i.IsDir ? media.audio.some(m => i.Name?.endsWith(m)) : i) ?? []
       break
     case 4:
-      arr = data.value.list.filter(i => !i.IsDir ? media.docs.some(m => i.Name?.endsWith(m)) : i)
+      arr = data.value?.list.filter(i => !i.IsDir ? media.docs.some(m => i.Name?.endsWith(m)) : i) ?? []
       break
   }
 

@@ -26,8 +26,8 @@ function createWindow() {
   console.log('System info', { isProd, platform, architucture: os.arch() })
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1440,
-    height: 1024,
+    width: 1280,
+    height: 820,
     minWidth: 1024,
     minHeight: 676,
     transparent: false,

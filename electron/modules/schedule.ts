@@ -20,21 +20,23 @@ export class ScheduleModule extends ModuleFactory {
     super()
     this.tasks = new Map()
     // 每小时30分时执行
-    // rule.minute = 30
-    this.rule.second = [10, 20, 30, 40, 50, 60]
+    this.rule.minute = 30
+    this.rule.second = 0
   }
 
   Register() {
     // 初始化任务
-    Object.values<ScheduleAddParams>(store.get(`schedule`)).forEach((item: ScheduleAddParams) => {
-      console.log('初始化任务:', item.name)
+    setTimeout(() => {
+      Object.values<ScheduleAddParams>(store.get(`schedule`) ?? {}).forEach((item: ScheduleAddParams) => {
+        console.log('初始化任务:', item.name)
 
-      const job = schedule.scheduleJob(this.rule, () => {
-        console.log('执行任务:', item.name)
-        execCrypt(rcloneExe, ['sync', `${item.fromFs}:${item.fromRemote}`, `${item.toFs}:${item.toRemote}`, '--files-only', 'false'])
+        const job = schedule.scheduleJob(this.rule, () => {
+          console.log('执行任务:', item.name)
+          execCrypt(rcloneExe, ['sync', `${item.fromFs}:${item.fromRemote}`, `${item.toFs}:${item.toRemote}`, '--files-only', 'false'])
+        })
+
+        this.tasks.set(item.name, job)
       })
-
-      this.tasks.set(item.name, job)
     })
 
     // 获取任务列表

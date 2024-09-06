@@ -4,6 +4,7 @@ import { DownloaderHelper } from 'node-downloader-helper'
 import type { WindowDownloadParams, WindowOpenParams } from '../event'
 import { WindowServiceEvent } from '../event'
 import { ModuleFactory } from '../utils/module'
+import { getLocalDriveList } from '../utils/exe'
 import { RcloneToken } from './rclone'
 
 const downloadTask = new Map<string, {
@@ -141,6 +142,18 @@ export class WindowModule extends ModuleFactory {
           reject(e)
         })
       })
+    })
+
+    // 获取本地盘符和可使用盘符列表
+    this.RegisterHandler(WindowServiceEvent.GetDrives, async () => {
+      const used = getLocalDriveList()
+
+      const unused = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'].map(i => i.toLocaleUpperCase()).filter(drive => !used.includes(drive))
+
+      return {
+        unused,
+        used,
+      }
     })
   }
 }

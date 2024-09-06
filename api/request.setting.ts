@@ -7,6 +7,10 @@ export const baseURL = {
 async function post<T>(method: 'POST' | 'PATCH' | 'PUT', url: string, data?: any, opts: { [k: string]: any } = { headers: {} }) {
   const headers = opts.headers ?? {}
 
+  if (!storage.GetItem('addr')) {
+    return null
+  }
+
   console.log('request url:', storage.GetItem('addr') + url)
   console.log('request data:', data)
   console.log('request Authorization:', storage.GetItem('token') ?? '')
@@ -25,6 +29,10 @@ async function post<T>(method: 'POST' | 'PATCH' | 'PUT', url: string, data?: any
 }
 
 async function get<T>(method: 'DELETE' | 'GET', url: string, data?: any) {
+  if (!storage.GetItem('addr')) {
+    return null
+  }
+
   const res = await $fetch<T>(storage.GetItem('addr') + url, {
     method,
     query: data,
