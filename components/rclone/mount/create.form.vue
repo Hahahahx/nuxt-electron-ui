@@ -17,7 +17,19 @@ const state = reactive({
 const open = ref(false)
 const electron = useElectron()
 
-const { data, pending } = useAsyncData(electron.actions!.getDrives)
+const data = ref<string[]>([])
+const loading = ref(false)
+
+effect(() => {
+  loading.value = true
+  electron.actions?.getDrives().then((res) => {
+    // alert.info('data', JSON.stringify(res))
+    data.value = res?.data?.unused.reverse() ?? []
+    // alert.info('data', JSON.stringify(data.value))
+  }).finally(() => {
+    loading.value = false
+  })
+})
 
 async function onSubmit() {
   open.value = false
@@ -54,8 +66,8 @@ async function onSubmit() {
         <UInput v-model="state.fs" disabled />
       </UFormGroup>
 
-      <UFormGroup label="挂载分区" required name="mountPoint">
-        <USelect v-model="state.mountPoint" :loading="pending" :options="data?.data?.unused.reverse() ?? []" placeholder="请选择分区" />
+      <UFormGroup label="挂载虚拟盘" required name="mountPoint">
+        <USelect v-model="state.mountPoint" :loading="loading" :options="data" placeholder="请选择虚拟盘" />
       </UFormGroup>
 
       <!-- <UFormGroup label="挂载点" required name="mountPoint">

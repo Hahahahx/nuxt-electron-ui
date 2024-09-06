@@ -146,7 +146,7 @@ export class WindowModule extends ModuleFactory {
 
     // 获取本地盘符和可使用盘符列表
     this.RegisterHandler(WindowServiceEvent.GetDrives, async () => {
-      const used = getLocalDriveList()
+      const used = await getLocalDriveList()
 
       const unused = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'].map(i => i.toLocaleUpperCase()).filter(drive => !used.includes(drive))
 

@@ -8,12 +8,12 @@ const schema = z.object({
   endpoint: z.string().min(1, '文件网关不能为空'),
   access_key_id: z.string().min(1, 'Access Key ID不能为空'),
   secret_access_key: z.string().min(1, 'Secret Access Key不能为空'),
-  bucket: z.string().optional(),
+  bucket: z.string().min(1, '桶名称不能为空'),
 })
 
 const state = reactive({
   name: 'New_OSCA',
-  endpoint: 'http://ocloud.ihep.ac.cn:6100',
+  endpoint: 'https://fgws3-ocloud.ihep.ac.cn',
   access_key_id: '',
   secret_access_key: '',
   bucket: '',
@@ -81,7 +81,7 @@ async function onSubmit(values: ZodInfer<typeof schema>) {
     <UFormGroup label="SecretKey" required name="secret_access_key">
       <UInput v-model="state.secret_access_key" />
     </UFormGroup>
-    <UFormGroup label="桶名称" name="bucket">
+    <UFormGroup label="桶名称" required name="bucket">
       <UInput v-model="state.bucket" />
     </UFormGroup>
   </UForm>

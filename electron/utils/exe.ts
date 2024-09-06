@@ -1,4 +1,4 @@
-import { execFile, execSync } from 'node:child_process'
+import { exec, execFile } from 'node:child_process'
 
 export function execCrypt(exe: string, command: string[]): Promise<any> {
   return new Promise((res, rej) => {
@@ -33,12 +33,25 @@ export function execCrypt(exe: string, command: string[]): Promise<any> {
 
 export function getLocalDriveList() { // 返回所有盘符，同步
   let arr: string[] = []
-  let str = execSync('wmic logicaldisk get caption').toString()// 将返回的变量改为字符串类型
-  str = str.replace('Caption', '')// 修改字符串
-  str = str.replace(/\s/g, '')
-  str = str.replace(/\n/g, '')
-  str = str.slice(0, -1)
-  console.log(str.split(':'), str)
-  arr = str.split(':')// 将字符串变为数组
-  return arr
+
+  return new Promise<string[]>((res, rej) => {
+    try {
+      exec('wmic logicaldisk get caption', (err: any, stdout: any, stderr: any) => {
+        if (err) {
+          rej(err)
+        }
+
+        let str = stdout.replace('Caption', '')// 修改字符串
+        str = str.replace(/\s/g, '')
+        str = str.replace(/\n/g, '')
+        str = str.slice(0, -1)
+        // console.log(str.split(':'), str)
+        arr = str.split(':')// 将字符串变为数组
+        res(arr)
+      })
+    }
+    catch (error) {
+      rej(error)
+    }
+  })
 }
